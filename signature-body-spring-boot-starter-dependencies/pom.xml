@@ -1,0 +1,76 @@
+<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://maven.apache.org/POM/4.0.0"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>com.github.douyayun</groupId>
+    <artifactId>signature-body-spring-boot-starter-dependencies</artifactId>
+    <version>${revision}</version>
+    <packaging>pom</packaging>
+
+    <name>${project.artifactId}</name>
+    <description>基础pom文件,管理整个项目的依赖版本</description>
+    <url>http://douyayun.cn</url>
+
+    <properties>
+        <revision>1.0.0</revision>
+        <!-- 统一依赖管理 -->
+        <spring.boot.version>2.7.8</spring.boot.version>
+        <!-- Web 相关 -->
+        <!-- <servlet.versoin>2.5</servlet.versoin>-->
+        <commons-lang3.version>3.8.1</commons-lang3.version>
+        <commons-codec.version>1.15</commons-codec.version>
+        <lombok.version>1.18.24</lombok.version>
+    </properties>
+
+    <dependencyManagement>
+        <dependencies>
+            <!-- 统一依赖管理 -->
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-dependencies</artifactId>
+                <version>${spring.boot.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+
+
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-devtools</artifactId>
+                <scope>runtime</scope>
+                <optional>true</optional>
+            </dependency>
+
+            <!--commons-lang3工具包依赖-->
+            <dependency>
+                <groupId>org.apache.commons</groupId>
+                <artifactId>commons-lang3</artifactId>
+                <version>${commons-lang3.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>commons-codec</groupId>
+                <artifactId>commons-codec</artifactId>
+                <version>${commons-codec.version}</version>
+            </dependency>
+
+            <!-- 业务组件 -->
+            <dependency>
+                <groupId>com.github.douyayun</groupId>
+                <artifactId>signature-body-spring-boot-starter</artifactId>
+                <version>${revision}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.github.douyayun</groupId>
+                <artifactId>signature-body-spring-boot-starter-examples-server</artifactId>
+                <version>${revision}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.github.douyayun</groupId>
+                <artifactId>signature-body-spring-boot-starter-examples-client</artifactId>
+                <version>${revision}</version>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+
+</project>
