@@ -2,6 +2,7 @@ package com.github.douyayun.signature.storage.impl;
 
 import com.github.douyayun.signature.properties.SignatureProperties;
 import com.github.douyayun.signature.storage.NonceConfigStorage;
+import lombok.extern.slf4j.Slf4j;
 
 import java.io.Serializable;
 
@@ -12,11 +13,13 @@ import java.io.Serializable;
  * @version v1.0.0
  * @date 2023/3/20 16:22
  */
+@Slf4j
 public class DefaultNonceConfigStorageImpl implements NonceConfigStorage, Serializable {
 
     private SignatureProperties signatureProperties;
 
     public DefaultNonceConfigStorageImpl(SignatureProperties signatureProperties) {
+        log.info("DefaultNonceConfigStorageImpl...");
         this.signatureProperties = signatureProperties;
     }
 
