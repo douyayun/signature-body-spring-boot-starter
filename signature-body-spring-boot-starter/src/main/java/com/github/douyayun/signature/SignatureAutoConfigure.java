@@ -2,6 +2,7 @@ package com.github.douyayun.signature;
 
 import com.github.douyayun.signature.filter.RequestBodyReadFilter;
 import com.github.douyayun.signature.interceptor.SignatureInterceptor;
+import com.github.douyayun.signature.manager.SignatureManager;
 import com.github.douyayun.signature.properties.SignatureProperties;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
@@ -11,6 +12,7 @@ import org.springframework.boot.context.properties.EnableConfigurationProperties
 import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Import;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistration;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
@@ -30,11 +32,15 @@ import java.util.List;
 @ConditionalOnClass(SignatureInterceptor.class)
 @EnableConfigurationProperties(SignatureProperties.class)
 @ConditionalOnProperty(prefix = "signature", value = "enabled", havingValue = "true")
+@Import({com.github.douyayun.signature.config.SignatureConfig.class})
 @Slf4j
 public class SignatureAutoConfigure implements WebMvcConfigurer {
 
     @Resource
     private SignatureProperties signatureProperties;
+
+    @Resource
+    private SignatureManager signatureManager;
 
     /**
      * 配置签名拦截器
@@ -45,7 +51,7 @@ public class SignatureAutoConfigure implements WebMvcConfigurer {
     public void addInterceptors(InterceptorRegistry registry) {
         validateConfig();
         List<String> excludePaths = signatureProperties.getExcludePaths();
-        InterceptorRegistration interceptorRegistration = registry.addInterceptor(new SignatureInterceptor(signatureProperties))
+        InterceptorRegistration interceptorRegistration = registry.addInterceptor(new SignatureInterceptor(signatureProperties, signatureManager))
                 .addPathPatterns(signatureProperties.getIncludePaths());
         if (excludePaths != null && !excludePaths.isEmpty()) {
             interceptorRegistration.excludePathPatterns(excludePaths);

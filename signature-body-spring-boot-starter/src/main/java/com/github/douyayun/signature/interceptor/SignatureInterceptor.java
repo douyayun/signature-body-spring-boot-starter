@@ -1,6 +1,7 @@
 package com.github.douyayun.signature.interceptor;
 
 import com.github.douyayun.signature.exception.SignatureException;
+import com.github.douyayun.signature.manager.SignatureManager;
 import com.github.douyayun.signature.manager.SignatureSecretManager;
 import com.github.douyayun.signature.properties.SignatureProperties;
 import com.github.douyayun.signature.util.JsonUtils;
@@ -33,8 +34,11 @@ public class SignatureInterceptor implements HandlerInterceptor {
      */
     private SignatureProperties signatureProperties;
 
-    public SignatureInterceptor(SignatureProperties signatureProperties) {
+    private SignatureManager signatureManager;
+
+    public SignatureInterceptor(SignatureProperties signatureProperties, SignatureManager signatureManager) {
         this.signatureProperties = signatureProperties;
+        this.signatureManager = signatureManager;
         if (signatureProperties.getSecret() != null && !signatureProperties.getSecret().isEmpty()) {
             SignatureSecretManager.initSecret(signatureProperties.getSecret());
         }

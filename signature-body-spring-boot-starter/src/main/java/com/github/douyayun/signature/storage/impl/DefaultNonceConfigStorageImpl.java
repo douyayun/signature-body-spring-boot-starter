@@ -1,7 +1,7 @@
-package com.github.douyayun.signature.config.impl;
+package com.github.douyayun.signature.storage.impl;
 
-import com.github.douyayun.signature.config.NonceConfigStorage;
 import com.github.douyayun.signature.properties.SignatureProperties;
+import com.github.douyayun.signature.storage.NonceConfigStorage;
 
 import java.io.Serializable;
 
