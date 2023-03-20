@@ -82,6 +82,7 @@ public class SignatureInterceptor implements HandlerInterceptor {
         if (!signData.toUpperCase().equals(sign.toUpperCase())) {
             throw new SignatureException();
         }
+
         return true;
     }
 
