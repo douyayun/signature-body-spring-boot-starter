@@ -1,8 +1,8 @@
 package com.example.douyayun.server.config;
 
-import com.github.douyayun.signature.manager.SignatureManager;
-import com.github.douyayun.signature.properties.SignatureProperties;
-import com.github.douyayun.signature.storage.impl.RedisNonceConfigStorageImpl;
+import io.github.douyayun.signature.manager.SignatureManager;
+import io.github.douyayun.signature.properties.SignatureProperties;
+import io.github.douyayun.signature.storage.impl.RedisNonceConfigStorageImpl;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

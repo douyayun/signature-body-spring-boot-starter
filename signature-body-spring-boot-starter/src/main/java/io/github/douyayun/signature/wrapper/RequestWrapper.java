@@ -1,4 +1,4 @@
-package com.github.douyayun.signature.wrapper;
+package io.github.douyayun.signature.wrapper;
 
 import lombok.extern.slf4j.Slf4j;
 

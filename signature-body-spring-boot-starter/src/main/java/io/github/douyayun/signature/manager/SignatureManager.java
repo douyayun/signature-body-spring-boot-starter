@@ -1,6 +1,6 @@
-package com.github.douyayun.signature.manager;
+package io.github.douyayun.signature.manager;
 
-import com.github.douyayun.signature.storage.NonceConfigStorage;
+import io.github.douyayun.signature.storage.NonceConfigStorage;
 import lombok.Data;
 
 /**

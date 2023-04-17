@@ -1,4 +1,4 @@
-package com.github.douyayun.signature.properties;
+package io.github.douyayun.signature.properties;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

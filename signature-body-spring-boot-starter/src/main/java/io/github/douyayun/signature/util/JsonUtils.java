@@ -1,4 +1,4 @@
-package com.github.douyayun.signature.util;
+package io.github.douyayun.signature.util;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.core.JsonGenerator;

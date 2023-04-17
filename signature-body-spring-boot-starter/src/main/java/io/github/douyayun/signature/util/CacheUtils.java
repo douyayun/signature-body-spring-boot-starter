@@ -1,4 +1,4 @@
-package com.github.douyayun.signature.util;
+package io.github.douyayun.signature.util;
 
 import com.google.common.cache.*;
 import lombok.extern.slf4j.Slf4j;
@@ -10,7 +10,7 @@ import java.util.concurrent.TimeUnit;
  * 功能描述
  */
 @Slf4j
-public class CacheManager {
+public class CacheUtils {
 
     /**
      * 缓存项最大数量
@@ -26,12 +26,7 @@ public class CacheManager {
      */
     private static LoadingCache<String, String> GLOBAL_CACHE = null;
 
-    /**
-     * 私有实例
-     */
-    private static CacheManager instance;
-
-    public CacheManager() {
+    static {
         try {
             GLOBAL_CACHE = loadCache(new CacheLoader<String, String>() {
                 @Override
@@ -43,18 +38,6 @@ public class CacheManager {
         } catch (Exception e) {
             log.error("初始化Guava Cache出错", e);
         }
-    }
-
-    /**
-     * 唯一公开获取实例的方法（静态工厂方法），该方法使用synchronized加锁，来保证线程安全性
-     *
-     * @return
-     */
-    public static synchronized CacheManager getInstance() {
-        if (instance == null) {
-            instance = new CacheManager();
-        }
-        return instance;
     }
 
     public static void setGuavaCacheSeconds(long guavaCacheSeconds) {

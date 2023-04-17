@@ -2,7 +2,7 @@ package com.example.douyayun.server.controller;
 
 import com.example.douyayun.server.vo.ApiResponse;
 import com.example.douyayun.server.vo.TestRequestVo;
-import com.github.douyayun.signature.util.JsonUtils;
+import io.github.douyayun.signature.util.JsonUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
 

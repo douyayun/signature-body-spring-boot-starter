@@ -1,4 +1,4 @@
-package com.github.douyayun.signature.storage;
+package io.github.douyayun.signature.storage;
 
 /**
  * nonce唯一性验证配置存储

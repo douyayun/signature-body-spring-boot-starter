@@ -1,7 +1,7 @@
-package com.github.douyayun.signature.storage.impl;
+package io.github.douyayun.signature.storage.impl;
 
-import com.github.douyayun.signature.properties.SignatureProperties;
-import com.github.douyayun.signature.storage.NonceConfigStorage;
+import io.github.douyayun.signature.properties.SignatureProperties;
+import io.github.douyayun.signature.storage.NonceConfigStorage;
 import lombok.extern.slf4j.Slf4j;
 
 import java.io.Serializable;

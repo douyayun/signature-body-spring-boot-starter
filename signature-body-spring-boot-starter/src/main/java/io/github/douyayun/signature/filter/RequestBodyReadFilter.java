@@ -1,7 +1,7 @@
-package com.github.douyayun.signature.filter;
+package io.github.douyayun.signature.filter;
 
-import com.github.douyayun.signature.util.RequestUtils;
-import com.github.douyayun.signature.wrapper.RequestWrapper;
+import io.github.douyayun.signature.util.RequestUtils;
+import io.github.douyayun.signature.wrapper.RequestWrapper;
 import lombok.extern.slf4j.Slf4j;
 
 import javax.servlet.*;

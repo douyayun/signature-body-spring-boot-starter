@@ -2,7 +2,7 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <parent>
         <artifactId>signature</artifactId>
-        <groupId>com.github.douyayun</groupId>
+        <groupId>io.github.douyayun</groupId>
         <version>${revision}</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
@@ -12,13 +12,17 @@
     <description>模拟客户端</description>
     <url>http://douyayun.cn</url>
 
+    <properties>
+        <maven.deploy.skip>true</maven.deploy.skip>
+    </properties>
+
     <dependencies>
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
         </dependency>
         <dependency>
-            <groupId>com.github.douyayun</groupId>
+            <groupId>io.github.douyayun</groupId>
             <artifactId>signature-body-spring-boot-starter</artifactId>
         </dependency>
         <dependency>

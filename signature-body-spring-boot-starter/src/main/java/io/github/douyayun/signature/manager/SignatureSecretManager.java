@@ -1,6 +1,6 @@
-package com.github.douyayun.signature.manager;
+package io.github.douyayun.signature.manager;
 
-import com.github.douyayun.signature.properties.SignatureProperties;
+import io.github.douyayun.signature.properties.SignatureProperties;
 
 import java.util.ArrayList;
 import java.util.List;

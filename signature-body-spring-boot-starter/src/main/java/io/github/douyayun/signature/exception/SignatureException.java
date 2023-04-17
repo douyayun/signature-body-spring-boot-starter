@@ -1,4 +1,4 @@
-package com.github.douyayun.signature.exception;
+package io.github.douyayun.signature.exception;
 
 /**
  * 签名异常

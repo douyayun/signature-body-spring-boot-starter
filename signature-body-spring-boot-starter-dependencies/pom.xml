@@ -2,21 +2,46 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>com.github.douyayun</groupId>
+    <groupId>io.github.douyayun</groupId>
     <artifactId>signature-body-spring-boot-starter-dependencies</artifactId>
     <version>${revision}</version>
     <packaging>pom</packaging>
 
-    <name>${project.artifactId}</name>
+<!--    <name>${project.artifactId}</name>-->
+    <name>${project.groupId}</name>
     <description>基础pom文件,管理整个项目的依赖版本</description>
-    <url>http://douyayun.cn</url>
+    <url>https://github.com/douyayun/signature-body-spring-boot-starter</url>
+
+    <licenses>
+        <license>
+            <name>The Apache Software License, Version 2.0</name>
+            <url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
+            <distribution>repo</distribution>
+        </license>
+    </licenses>
+
+    <developers>
+        <developer>
+            <name>houp</name>
+            <email>2389492@qq.com</email>
+            <organization>https://douyayun.cn</organization>
+        </developer>
+    </developers>
+
+    <scm>
+        <connection>scm:git@github.com:douyayun/signature-body-spring-boot-starter.git</connection>
+        <developerConnection>scm:git@github.com:douyayun/signature-body-spring-boot-starter.git</developerConnection>
+        <url>git@github.com:douyayun/signature-body-spring-boot-starter.git</url>
+    </scm>
+
+    <issueManagement>
+        <system>Github Issue</system>
+        <url>https://github.com/douyayun/signature-body-spring-boot-starter/issues</url>
+    </issueManagement>
 
     <properties>
         <revision>1.0.0</revision>
-        <!-- 统一依赖管理 -->
         <spring.boot.version>2.7.8</spring.boot.version>
-        <!-- Web 相关 -->
-        <!-- <servlet.versoin>2.5</servlet.versoin>-->
         <commons-lang3.version>3.8.1</commons-lang3.version>
         <commons-codec.version>1.15</commons-codec.version>
         <lombok.version>1.18.24</lombok.version>
@@ -62,21 +87,100 @@
             </dependency>
             <!-- 业务组件 -->
             <dependency>
-                <groupId>com.github.douyayun</groupId>
+                <groupId>io.github.douyayun</groupId>
                 <artifactId>signature-body-spring-boot-starter</artifactId>
                 <version>${revision}</version>
             </dependency>
             <dependency>
-                <groupId>com.github.douyayun</groupId>
+                <groupId>io.github.douyayun</groupId>
                 <artifactId>signature-body-spring-boot-starter-examples-server</artifactId>
                 <version>${revision}</version>
             </dependency>
             <dependency>
-                <groupId>com.github.douyayun</groupId>
+                <groupId>io.github.douyayun</groupId>
                 <artifactId>signature-body-spring-boot-starter-examples-client</artifactId>
                 <version>${revision}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>
+
+    <build>
+        <plugins>
+            <!-- compiler -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.1</version>
+                <configuration>
+                    <source>${java.version}</source>
+                    <target>${java.version}</target>
+                </configuration>
+            </plugin>
+            <!-- source -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-source-plugin</artifactId>
+                <version>2.2.1</version>
+                <executions>
+                    <execution>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>jar-no-fork</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+            <!-- javadoc -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-javadoc-plugin</artifactId>
+                <version>2.9.1</version>
+                <configuration>
+                    <source>11</source>
+                    <aggregate>true</aggregate>
+                    <charset>UTF-8</charset>
+                    <encoding>UTF-8</encoding>
+                    <docencoding>UTF-8</docencoding>
+                    <additionalparam>-Xdoclint:none</additionalparam>
+                </configuration>
+                <executions>
+                    <execution>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>jar</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+            <!-- GPG mvn clean deploy -P release -Dgpg.passphrase=YourPassphase -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-gpg-plugin</artifactId>
+                <version>1.5</version>
+                <executions>
+                    <execution>
+                        <id>sign-artifacts</id>
+                        <phase>verify</phase>
+                        <goals>
+                            <goal>sign</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
+
+    <distributionManagement>
+        <snapshotRepository>
+            <id>ossrh</id>
+            <name>OSS Snapshots Repository</name>
+            <url>https://s01.oss.sonatype.org/content/repositories/snapshots</url>
+        </snapshotRepository>
+        <repository>
+            <id>ossrh</id>
+            <name>OSS Staging Repository</name>
+            <url>https://s01.oss.sonatype.org/service/local/staging/deploy/maven2/</url>
+        </repository>
+    </distributionManagement>
 
 </project>

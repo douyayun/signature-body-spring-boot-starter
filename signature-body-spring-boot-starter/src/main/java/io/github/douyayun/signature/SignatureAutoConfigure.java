@@ -1,9 +1,9 @@
-package com.github.douyayun.signature;
+package io.github.douyayun.signature;
 
-import com.github.douyayun.signature.config.SignatureConfig;
-import com.github.douyayun.signature.interceptor.SignatureInterceptor;
-import com.github.douyayun.signature.manager.SignatureManager;
-import com.github.douyayun.signature.properties.SignatureProperties;
+import io.github.douyayun.signature.config.SignatureConfig;
+import io.github.douyayun.signature.interceptor.SignatureInterceptor;
+import io.github.douyayun.signature.manager.SignatureManager;
+import io.github.douyayun.signature.properties.SignatureProperties;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;

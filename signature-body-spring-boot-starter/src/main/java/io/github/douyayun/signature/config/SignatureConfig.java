@@ -1,10 +1,10 @@
-package com.github.douyayun.signature.config;
+package io.github.douyayun.signature.config;
 
-import com.github.douyayun.signature.filter.RequestBodyReadFilter;
-import com.github.douyayun.signature.manager.SignatureManager;
-import com.github.douyayun.signature.properties.SignatureProperties;
-import com.github.douyayun.signature.storage.NonceConfigStorage;
-import com.github.douyayun.signature.storage.impl.DefaultNonceConfigStorageImpl;
+import io.github.douyayun.signature.filter.RequestBodyReadFilter;
+import io.github.douyayun.signature.manager.SignatureManager;
+import io.github.douyayun.signature.properties.SignatureProperties;
+import io.github.douyayun.signature.storage.NonceConfigStorage;
+import io.github.douyayun.signature.storage.impl.DefaultNonceConfigStorageImpl;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.boot.web.servlet.FilterRegistrationBean;

@@ -1,13 +1,13 @@
-package com.github.douyayun.signature.interceptor;
+package io.github.douyayun.signature.interceptor;
 
-import com.github.douyayun.signature.exception.SignatureException;
-import com.github.douyayun.signature.manager.SignatureManager;
-import com.github.douyayun.signature.manager.SignatureSecretManager;
-import com.github.douyayun.signature.properties.SignatureProperties;
-import com.github.douyayun.signature.util.JsonUtils;
-import com.github.douyayun.signature.util.RequestUtils;
-import com.github.douyayun.signature.util.SignUtils;
-import com.github.douyayun.signature.wrapper.RequestWrapper;
+import io.github.douyayun.signature.exception.SignatureException;
+import io.github.douyayun.signature.manager.SignatureManager;
+import io.github.douyayun.signature.manager.SignatureSecretManager;
+import io.github.douyayun.signature.properties.SignatureProperties;
+import io.github.douyayun.signature.util.JsonUtils;
+import io.github.douyayun.signature.util.RequestUtils;
+import io.github.douyayun.signature.util.SignUtils;
+import io.github.douyayun.signature.wrapper.RequestWrapper;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.math.NumberUtils;
