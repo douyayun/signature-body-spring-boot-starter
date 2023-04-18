@@ -25,4 +25,6 @@ public class TestRequestVo implements Serializable {
 
     private String mobile;
 
+    private String[] hobby;
+
 }

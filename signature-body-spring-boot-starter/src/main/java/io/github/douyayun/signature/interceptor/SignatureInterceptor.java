@@ -79,8 +79,8 @@ public class SignatureInterceptor implements HandlerInterceptor {
             jsonData = new RequestWrapper(request).getBodyString();
             log.info("signature json data：{}", jsonData);
         }
-        String noSign = appId + timestamp + nonce + parameterData + jsonData;
-        String signData = SignUtils.getSign(noSign, appSecret);
+        String noSign = appId + timestamp + nonce + parameterData + jsonData + appSecret;
+        String signData = SignUtils.getSign(noSign);
         log.info("signature 待签名字符串：{},本机签名：{},签名参数：{}", noSign, signData, sign);
         if (!sign.equalsIgnoreCase(signData) && !signatureProperties.isDebug()) {
             throw new SignatureException(1000, "sign签名错误");

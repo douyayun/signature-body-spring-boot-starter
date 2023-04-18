@@ -18,12 +18,11 @@ public class SignUtils {
     /**
      * 数据签名
      *
-     * @param body      数据
-     * @param secretKey 秘钥
+     * @param data 数据
      * @return
      */
-    public static String getSign(String body, String secretKey) {
-        return DigestUtils.md5Hex(body + secretKey).toLowerCase();
+    public static String getSign(String data) {
+        return DigestUtils.md5Hex(data).toLowerCase();
     }
 
     /**

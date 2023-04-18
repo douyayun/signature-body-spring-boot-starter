@@ -23,7 +23,7 @@ import java.util.UUID;
 public class Test1Controller {
 
     @GetMapping("get")
-    public TestRequestVo get() {
+    public TestRequestVo get(String[] name, Integer age, String t) {
         TestRequestVo testRequestVo = TestRequestVo.builder().id(12).age(20).mobile("1311111112").name("houp").build();
         String data = JsonUtils.toJson(testRequestVo);
         log.info(data);
@@ -31,7 +31,7 @@ public class Test1Controller {
     }
 
     @PostMapping("post/1")
-    public ApiResponse post1(String[] name, String age, String t) {
+    public ApiResponse post1(String[] name, Integer age, String t) {
         log.info("test1 post1 name：{} age：{} t：{} ...", name, age, t);
         return ApiResponse.success(null);
     }
@@ -43,8 +43,8 @@ public class Test1Controller {
     }
 
     @PostMapping("post/3")
-    public ApiResponse post3(String t, String t2, String t3, MultipartFile file) {
-        log.info("test1 post3 ：t：{} t2：{} t3：{} ...", t, t2, t3);
+    public ApiResponse post3(String[] name, Integer age, String t, MultipartFile file) {
+        log.info("test1 post3 ：name：{} age：{} t：{} ...", name, age, t);
         String filePath = "";
         String format = System.currentTimeMillis() + "";
         String fileSavePath = "C:\\images\\";
