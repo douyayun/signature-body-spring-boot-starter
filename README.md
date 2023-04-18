@@ -53,7 +53,8 @@ signature.secret[1].app-secret=f8c30adb67b14bc6a53b29b1de01b150
 #### (1)、get请求
 
 http://localhost:8000/test1/get?name=1,2,3&age=23&t=aaaa
-
+![img.png](docs/img/get_1.png)
+![img.png](docs/img/get_2.png)
 ```
 待签名字符串：162192367250416818059788091a230-8c4f-4d6f-b4be-6c585af6c8adage=23&name=1,2,3&t=aaaaf8c30adb67b14bc6a53b29b1de01b150
 签名：789726dea11c827f65e66981362a0d1a
@@ -62,20 +63,24 @@ http://localhost:8000/test1/get?name=1,2,3&age=23&t=aaaa
 #### (2)、post请求form-data
 http://localhost:8000/test1/post/1?t=aaaa
 
+![img.png](docs/img/post_form-data_1.png)
+![img.png](docs/img/post_form-data_2.png)
 ```
 待签名字符串：162192367250416818059788091a230-8c4f-4d6f-b4be-6c585af6c8adage=23&name=1,2,3&t=aaaaf8c30adb67b14bc6a53b29b1de01b150
 签名：789726dea11c827f65e66981362a0d1a
 ```
 #### (3)、post请求x-www-form-urlencoded
 http://localhost:8000/test1/post/1?t=aaaa
-
+![img.png](docs/img/post_x-www-form-urlencoded_1.png)
+![img.png](docs/img/post_x-www-form-urlencoded_2.png)
 ```
 待签名字符串：162192367250416818059788091a230-8c4f-4d6f-b4be-6c585af6c8adage=23&name=1,2,3&t=aaaaf8c30adb67b14bc6a53b29b1de01b150
 签名：789726dea11c827f65e66981362a0d1a
 ```
 #### (4)、post请求application/json
 http://localhost:8000/test1/post/2?t=aaaa
-
+![img.png](docs/img/post_json_1.png)
+![img.png](docs/img/post_json_2.png)
 ```
 待签名字符串：162192367250416818059788091a230-8c4f-4d6f-b4be-6c585af6c8adt=aaaa{"id":123,"name":"zhangsan","age":23,"mobile":"13111111111","hobby":["篮球","足球"]}f8c30adb67b14bc6a53b29b1de01b150
 签名：22c6d0584016bd2a5937b5b95cc06c87
