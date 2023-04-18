@@ -1,6 +1,6 @@
 # SpringBoot 接口数据签名组件
 
-### 1、概述
+### 概述
 此组件支持query、form、json表单签名<br>
 请求头需添加以下参数<br>
 
@@ -60,16 +60,17 @@ http://localhost:8000/test1/get?name=1,2,3&age=23&t=aaaa
 签名：789726dea11c827f65e66981362a0d1a
 ```
 
-#### (2)、post请求form-data
+#### (2)、post请求 form-data
 http://localhost:8000/test1/post/1?t=aaaa
 
 ![img.png](docs/img/post_form-data_1.png)
 ![img.png](docs/img/post_form-data_2.png)
+
 ```
 待签名字符串：162192367250416818059788091a230-8c4f-4d6f-b4be-6c585af6c8adage=23&name=1,2,3&t=aaaaf8c30adb67b14bc6a53b29b1de01b150
 签名：789726dea11c827f65e66981362a0d1a
 ```
-#### (3)、post请求x-www-form-urlencoded
+#### (3)、post请求 x-www-form-urlencoded
 http://localhost:8000/test1/post/1?t=aaaa
 ![img.png](docs/img/post_x-www-form-urlencoded_1.png)
 ![img.png](docs/img/post_x-www-form-urlencoded_2.png)
@@ -77,7 +78,7 @@ http://localhost:8000/test1/post/1?t=aaaa
 待签名字符串：162192367250416818059788091a230-8c4f-4d6f-b4be-6c585af6c8adage=23&name=1,2,3&t=aaaaf8c30adb67b14bc6a53b29b1de01b150
 签名：789726dea11c827f65e66981362a0d1a
 ```
-#### (4)、post请求application/json
+#### (4)、post请求 application/json
 http://localhost:8000/test1/post/2?t=aaaa
 ![img.png](docs/img/post_json_1.png)
 ![img.png](docs/img/post_json_2.png)
