@@ -8,9 +8,8 @@ import org.springframework.web.bind.annotation.RestController;
 /**
  * TODO
  *
- * @author: houp
- * @date: 2023/3/17 22:02
- * @version: 1.0.0
+ * @author houp
+ * @since 1.0.0
  */
 @RestController
 @RequestMapping("test3")

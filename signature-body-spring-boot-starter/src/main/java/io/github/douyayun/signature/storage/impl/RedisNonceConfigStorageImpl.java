@@ -10,8 +10,7 @@ import java.io.Serializable;
  * TODO
  *
  * @author houp
- * @version v1.0.0
- * @date 2023/3/20 16:22
+ * @since 1.0.0
  */
 @Slf4j
 public class RedisNonceConfigStorageImpl implements NonceConfigStorage, Serializable {

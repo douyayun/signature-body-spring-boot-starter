@@ -1,5 +1,7 @@
 package com.example.douyayun.server.controller;
 
+import io.github.douyayun.signature.manager.SignatureSecretManager;
+import io.github.douyayun.signature.properties.SignatureProperties;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -7,9 +9,8 @@ import org.springframework.web.bind.annotation.RestController;
 /**
  * TODO
  *
- * @author: houp
- * @date: 2023/3/18 0:44
- * @version: 1.0.0
+ * @author houp
+ * @since 1.0.0
  */
 @RestController
 @RequestMapping("echo")
@@ -22,7 +23,7 @@ public class EchoController {
 
     @GetMapping("append")
     public String appent() {
-//        SignatureSecretManager.appendSecret(new SignatureProperties.Secret("1", "1"));
+        SignatureSecretManager.appendSecret(new SignatureProperties.Secret("1", "1"));
         return System.currentTimeMillis() + "";
     }
 

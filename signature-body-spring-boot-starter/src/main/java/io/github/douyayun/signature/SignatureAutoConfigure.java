@@ -23,8 +23,7 @@ import java.util.List;
  * 签名自动配置
  *
  * @author houp
- * @version 1.0.0
- * @date 2023/3/17 20:16
+ * @since 1.0.0
  */
 @Configuration
 @ConditionalOnWebApplication

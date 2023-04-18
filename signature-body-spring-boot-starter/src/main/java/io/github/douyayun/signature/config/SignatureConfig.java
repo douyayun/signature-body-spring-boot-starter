@@ -18,9 +18,8 @@ import java.util.List;
 /**
  * TODO
  *
- * @author: houp
- * @date: 2023/3/20 21:00
- * @version: 1.0.0
+ * @author houp
+ * @since 1.0.0
  */
 @Configuration
 @Slf4j

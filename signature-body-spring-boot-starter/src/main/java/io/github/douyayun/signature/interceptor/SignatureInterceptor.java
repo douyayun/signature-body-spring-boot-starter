@@ -23,8 +23,7 @@ import java.util.Map;
  * 签名拦截器
  *
  * @author houp
- * @version 1.0.0
- * @date 2023/3/17 20:16
+ * @since 1.0.0
  */
 @Slf4j
 public class SignatureInterceptor implements HandlerInterceptor {

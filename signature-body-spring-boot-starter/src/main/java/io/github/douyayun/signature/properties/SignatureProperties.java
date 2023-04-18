@@ -12,8 +12,7 @@ import java.util.List;
  * 签名配置
  *
  * @author houp
- * @version 1.0.0
- * @date 2023/3/17 20:16
+ * @since 1.0.0
  */
 @Data
 @ToString

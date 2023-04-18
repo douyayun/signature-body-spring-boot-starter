@@ -4,8 +4,7 @@ package io.github.douyayun.signature.storage;
  * nonce唯一性验证配置存储
  *
  * @author houp
- * @version v1.0.0
- * @date 2023/3/20 15:57
+ * @since 1.0.0
  */
 public interface NonceConfigStorage {
 

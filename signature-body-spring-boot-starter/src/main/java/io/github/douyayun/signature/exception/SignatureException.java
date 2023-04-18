@@ -4,15 +4,13 @@ package io.github.douyayun.signature.exception;
  * 签名异常
  *
  * @author houp
- * @version 1.0.0
- * @date 2023/3/17 20:16
+ * @since 1.0.0
  */
 public class SignatureException extends RuntimeException {
 
     /**
      * 全局错误码
      *
-     * @see GlobalErrorCodeConstants
      */
     private Integer code = 1000;
     /**
