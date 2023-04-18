@@ -22,7 +22,12 @@ public class SignatureProperties {
     /**
      * 是否启用
      */
-    private boolean enabled;
+    private boolean debug = false;
+
+    /**
+     * 是否启用
+     */
+    private boolean enabled = false;
 
     /**
      * 启用时间戳

@@ -82,10 +82,9 @@ public class SignatureInterceptor implements HandlerInterceptor {
         String noSign = appId + timestamp + nonce + parameterData + jsonData;
         String signData = SignUtils.getSign(noSign, appSecret);
         log.info("signature 待签名字符串：{},本机签名：{},签名参数：{}", noSign, signData, sign);
-        if (!signData.toUpperCase().equals(sign.toUpperCase())) {
-            throw new SignatureException();
+        if (!sign.equalsIgnoreCase(signData) && !signatureProperties.isDebug()) {
+            throw new SignatureException(1000, "sign签名错误");
         }
-
         return true;
     }
 

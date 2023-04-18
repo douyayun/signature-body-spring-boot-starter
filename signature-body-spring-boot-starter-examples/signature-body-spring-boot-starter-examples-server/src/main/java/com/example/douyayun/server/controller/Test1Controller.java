@@ -5,6 +5,11 @@ import com.example.douyayun.server.vo.TestRequestVo;
 import io.github.douyayun.signature.util.JsonUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
+
+import java.io.File;
+import java.io.IOException;
+import java.util.UUID;
 
 /**
  * TODO
@@ -18,11 +23,11 @@ import org.springframework.web.bind.annotation.*;
 public class Test1Controller {
 
     @GetMapping("get")
-    public String get() {
+    public TestRequestVo get() {
         TestRequestVo testRequestVo = TestRequestVo.builder().id(12).age(20).mobile("1311111112").name("houp").build();
         String data = JsonUtils.toJson(testRequestVo);
         log.info(data);
-        return data;
+        return testRequestVo;
     }
 
     @PostMapping("post/1")
@@ -35,6 +40,34 @@ public class Test1Controller {
     public ApiResponse post2(String t, @RequestBody TestRequestVo testRequestVo) {
         log.info("test1 post2 ：{} t：{} ...", testRequestVo.toString(), t);
         return ApiResponse.success(testRequestVo);
+    }
+
+    @PostMapping("post/3")
+    public ApiResponse post3(String t, String t2, String t3, MultipartFile file) {
+        log.info("test1 post3 ：t：{} t2：{} t3：{} ...", t, t2, t3);
+        String filePath = "";
+        String format = System.currentTimeMillis() + "";
+        String fileSavePath = "C:\\images\\";
+        File folder = new File(fileSavePath + format);
+        if (!folder.isDirectory()) {
+            folder.mkdirs();
+        }
+        String oldName = file.getOriginalFilename();
+        String newName = UUID.randomUUID() + oldName.substring(oldName.lastIndexOf("."), oldName.length());
+        try {
+            file.transferTo(new File(folder, newName));
+            filePath = "/" + format + "/" + newName;
+        } catch (IOException e) {
+            log.error("上传失败", e);
+            throw new RuntimeException("上传失败");
+        }
+        return ApiResponse.success(filePath);
+    }
+
+    @PostMapping("post/4")
+    public ApiResponse post4(String t, String t2, String t3, MultipartFile[] files) {
+        log.info("test1 post4 ：t：{} t2：{} t3：{} ...", t, t2, t3);
+        return ApiResponse.success(t);
     }
 
 }
