@@ -2,21 +2,46 @@
 <project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://maven.apache.org/POM/4.0.0"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
+
     <groupId>io.github.douyayun</groupId>
     <artifactId>signature</artifactId>
     <version>${revision}</version>
     <packaging>pom</packaging>
 
-    <modules>
-        <module>signature-body-spring-boot-starter-dependencies</module>
-        <module>signature-body-spring-boot-starter</module>
-        <module>signature-body-spring-boot-starter-examples-server</module>
-        <module>signature-body-spring-boot-starter-examples-client</module>
-    </modules>
-
     <name>${project.artifactId}</name>
     <description>api signature</description>
     <url>https://github.com/douyayun/signature-body-spring-boot-starter</url>
+
+    <modules>
+        <module>signature-body-spring-boot-starter-dependencies</module>
+        <module>signature-body-spring-boot-starter</module>
+        <module>signature-body-spring-boot-starter-examples</module>
+    </modules>
+
+    <properties>
+        <revision>1.0.1</revision>
+        <java.version>1.8</java.version>
+        <maven.compiler.source>${java.version}</maven.compiler.source>
+        <maven.compiler.target>${java.version}</maven.compiler.target>
+        <maven-surefire-plugin.version>3.0.0-M5</maven-surefire-plugin.version>
+        <maven-compiler-plugin.version>3.8.1</maven-compiler-plugin.version>
+        <flatten-maven-plugin.version>1.2.7</flatten-maven-plugin.version>
+        <lombok.version>1.18.24</lombok.version>
+        <spring.boot.version>2.7.8</spring.boot.version>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    </properties>
+
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>io.github.douyayun</groupId>
+                <artifactId>signature-body-spring-boot-starter-dependencies</artifactId>
+                <version>${revision}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
 
     <licenses>
         <license>
@@ -44,31 +69,6 @@
         <system>Github Issue</system>
         <url>https://github.com/douyayun/signature-body-spring-boot-starter/issues</url>
     </issueManagement>
-
-    <properties>
-        <revision>1.0.1</revision>
-        <java.version>1.8</java.version>
-        <maven.compiler.source>${java.version}</maven.compiler.source>
-        <maven.compiler.target>${java.version}</maven.compiler.target>
-        <maven-surefire-plugin.version>3.0.0-M5</maven-surefire-plugin.version>
-        <maven-compiler-plugin.version>3.8.1</maven-compiler-plugin.version>
-        <flatten-maven-plugin.version>1.2.7</flatten-maven-plugin.version>
-        <lombok.version>1.18.24</lombok.version>
-        <spring.boot.version>2.7.8</spring.boot.version>
-        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    </properties>
-
-    <dependencyManagement>
-        <dependencies>
-            <dependency>
-                <groupId>io.github.douyayun</groupId>
-                <artifactId>signature-body-spring-boot-starter-dependencies</artifactId>
-                <version>${revision}</version>
-                <type>pom</type>
-                <scope>import</scope>
-            </dependency>
-        </dependencies>
-    </dependencyManagement>
 
     <build>
         <plugins>

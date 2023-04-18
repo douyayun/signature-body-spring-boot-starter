@@ -7,10 +7,70 @@
     <version>${revision}</version>
     <packaging>pom</packaging>
 
-<!--    <name>${project.artifactId}</name>-->
-    <name>${project.groupId}</name>
+    <name>${project.artifactId}</name>
     <description>基础pom文件,管理整个项目的依赖版本</description>
     <url>https://github.com/douyayun/signature-body-spring-boot-starter</url>
+
+    <properties>
+        <revision>1.0.1</revision>
+        <flatten-maven-plugin.version>1.2.7</flatten-maven-plugin.version>
+        <spring.boot.version>2.7.8</spring.boot.version>
+        <commons-lang3.version>3.8.1</commons-lang3.version>
+        <commons-codec.version>1.15</commons-codec.version>
+        <lombok.version>1.18.24</lombok.version>
+        <guava.version>31.1-jre</guava.version>
+    </properties>
+
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-dependencies</artifactId>
+                <version>${spring.boot.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-devtools</artifactId>
+                <scope>runtime</scope>
+                <optional>true</optional>
+            </dependency>
+
+            <!-- commons-lang3工具包依赖 -->
+            <dependency>
+                <groupId>org.apache.commons</groupId>
+                <artifactId>commons-lang3</artifactId>
+                <version>${commons-lang3.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>commons-codec</groupId>
+                <artifactId>commons-codec</artifactId>
+                <version>${commons-codec.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.google.guava</groupId>
+                <artifactId>guava</artifactId>
+                <version>${guava.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>io.github.douyayun</groupId>
+                <artifactId>signature-body-spring-boot-starter</artifactId>
+                <version>${revision}</version>
+            </dependency>
+            <dependency>
+                <groupId>io.github.douyayun</groupId>
+                <artifactId>signature-body-spring-boot-starter-examples-server</artifactId>
+                <version>${revision}</version>
+            </dependency>
+            <dependency>
+                <groupId>io.github.douyayun</groupId>
+                <artifactId>signature-body-spring-boot-starter-examples-client</artifactId>
+                <version>${revision}</version>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
 
     <licenses>
         <license>
@@ -38,72 +98,6 @@
         <system>Github Issue</system>
         <url>https://github.com/douyayun/signature-body-spring-boot-starter/issues</url>
     </issueManagement>
-
-    <properties>
-        <revision>1.0.1</revision>
-        <flatten-maven-plugin.version>1.2.7</flatten-maven-plugin.version>
-        <spring.boot.version>2.7.8</spring.boot.version>
-        <commons-lang3.version>3.8.1</commons-lang3.version>
-        <commons-codec.version>1.15</commons-codec.version>
-        <lombok.version>1.18.24</lombok.version>
-        <guava.version>28.1-jre</guava.version>
-    </properties>
-
-    <dependencyManagement>
-        <dependencies>
-            <!-- 统一依赖管理 -->
-            <dependency>
-                <groupId>org.springframework.boot</groupId>
-                <artifactId>spring-boot-dependencies</artifactId>
-                <version>${spring.boot.version}</version>
-                <type>pom</type>
-                <scope>import</scope>
-            </dependency>
-
-
-            <dependency>
-                <groupId>org.springframework.boot</groupId>
-                <artifactId>spring-boot-devtools</artifactId>
-                <scope>runtime</scope>
-                <optional>true</optional>
-            </dependency>
-
-            <!--commons-lang3工具包依赖-->
-            <dependency>
-                <groupId>org.apache.commons</groupId>
-                <artifactId>commons-lang3</artifactId>
-                <version>${commons-lang3.version}</version>
-            </dependency>
-
-            <dependency>
-                <groupId>commons-codec</groupId>
-                <artifactId>commons-codec</artifactId>
-                <version>${commons-codec.version}</version>
-            </dependency>
-
-            <dependency>
-                <groupId>com.google.guava</groupId>
-                <artifactId>guava</artifactId>
-                <version>${guava.version}</version>
-            </dependency>
-            <!-- 业务组件 -->
-            <dependency>
-                <groupId>io.github.douyayun</groupId>
-                <artifactId>signature-body-spring-boot-starter</artifactId>
-                <version>${revision}</version>
-            </dependency>
-            <dependency>
-                <groupId>io.github.douyayun</groupId>
-                <artifactId>signature-body-spring-boot-starter-examples-server</artifactId>
-                <version>${revision}</version>
-            </dependency>
-            <dependency>
-                <groupId>io.github.douyayun</groupId>
-                <artifactId>signature-body-spring-boot-starter-examples-client</artifactId>
-                <version>${revision}</version>
-            </dependency>
-        </dependencies>
-    </dependencyManagement>
 
     <build>
         <plugins>

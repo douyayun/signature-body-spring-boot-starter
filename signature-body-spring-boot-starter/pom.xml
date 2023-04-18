@@ -1,18 +1,18 @@
 <project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://maven.apache.org/POM/4.0.0"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+    <modelVersion>4.0.0</modelVersion>
     <parent>
         <groupId>io.github.douyayun</groupId>
         <artifactId>signature</artifactId>
         <version>${revision}</version>
+        <relativePath>../pom.xml</relativePath>
     </parent>
-    <modelVersion>4.0.0</modelVersion>
 
     <artifactId>signature-body-spring-boot-starter</artifactId>
-    <packaging>jar</packaging>
 
     <name>${project.artifactId}</name>
-    <description>signature starter</description>
-    <url>http://douyayun.cn</url>
+    <description>API接口签名防篡改</description>
+    <url>https://github.com/douyayun/signature-body-spring-boot-starter</url>
 
     <dependencies>
         <dependency>
@@ -20,7 +20,6 @@
             <artifactId>javax.servlet-api</artifactId>
             <scope>compile</scope>
         </dependency>
-
         <dependency>
             <groupId>org.apache.commons</groupId>
             <artifactId>commons-lang3</artifactId>
@@ -39,12 +38,6 @@
             <artifactId>guava</artifactId>
             <!-- <scope>compile</scope>-->
         </dependency>
-
-        <!--        <dependency>-->
-        <!--            <groupId>org.springframework.boot</groupId>-->
-        <!--            <artifactId>spring-boot-starter-web</artifactId>-->
-        <!--        </dependency>-->
-
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-autoconfigure</artifactId>
@@ -62,23 +55,5 @@
         </dependency>
 
     </dependencies>
-
-    <build>
-        <!-- 设置构建的 jar 包名 -->
-        <finalName>${project.artifactId}-${revision}</finalName>
-        <plugins>
-            <!-- 打包 -->
-            <plugin>
-                <groupId>org.springframework.boot</groupId>
-                <artifactId>spring-boot-maven-plugin</artifactId>
-                <version>2.7.8</version> <!-- 如果 spring.boot.version 版本修改，则这里也要跟着修改 -->
-                <configuration>
-                    <fork>true</fork>
-                </configuration>
-
-            </plugin>
-        </plugins>
-    </build>
-
 
 </project>
