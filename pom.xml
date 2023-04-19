@@ -19,7 +19,7 @@
     </modules>
 
     <properties>
-        <revision>1.0.2</revision>
+        <revision>1.0.3</revision>
         <java.version>1.8</java.version>
         <maven.compiler.source>${java.version}</maven.compiler.source>
         <maven.compiler.target>${java.version}</maven.compiler.target>
@@ -136,36 +136,40 @@
                             </execution>
                         </executions>
                     </plugin>
-
-                    <plugin>
-                        <groupId>org.codehaus.mojo</groupId>
-                        <artifactId>flatten-maven-plugin</artifactId>
-                        <version>${flatten-maven-plugin.version}</version>
-                        <configuration>
-                            <updatePomFile>true</updatePomFile>
-                            <flattenMode>resolveCiFriendliesOnly</flattenMode>
-                        </configuration>
-                        <executions>
-                            <execution>
-                                <id>flatten</id>
-                                <phase>process-resources</phase>
-                                <goals>
-                                    <goal>flatten</goal>
-                                </goals>
-                            </execution>
-                            <execution>
-                                <id>flatten.clean</id>
-                                <phase>clean</phase>
-                                <goals>
-                                    <goal>clean</goal>
-                                </goals>
-                            </execution>
-                        </executions>
-                    </plugin>
                 </plugins>
             </build>
         </profile>
     </profiles>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>flatten-maven-plugin</artifactId>
+                <version>${flatten-maven-plugin.version}</version>
+                <configuration>
+                    <updatePomFile>true</updatePomFile>
+                    <flattenMode>resolveCiFriendliesOnly</flattenMode>
+                </configuration>
+                <executions>
+                    <execution>
+                        <id>flatten</id>
+                        <phase>process-resources</phase>
+                        <goals>
+                            <goal>flatten</goal>
+                        </goals>
+                    </execution>
+                    <execution>
+                        <id>flatten.clean</id>
+                        <phase>clean</phase>
+                        <goals>
+                            <goal>clean</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
 
     <distributionManagement>
         <snapshotRepository>
@@ -184,7 +188,7 @@
         <repository>
             <id>aliyunmaven</id>
             <name>aliyun</name>
-            <url>https://maven.aliyun.com/repository/public</url>
+            <url>https://maven.aliyun.com/repository/central</url>
         </repository>
     </repositories>
 

@@ -6,7 +6,7 @@ package io.github.douyayun.signature.storage;
  * @author houp
  * @since 1.0.0
  */
-public interface NonceConfigStorage {
+public interface ConfigStorage {
 
     /**
      * 获取票据  锁定当前appId的nonce. 防止重放攻击

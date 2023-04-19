@@ -3,8 +3,8 @@ package io.github.douyayun.signature.config;
 import io.github.douyayun.signature.filter.RequestBodyReadFilter;
 import io.github.douyayun.signature.manager.SignatureManager;
 import io.github.douyayun.signature.properties.SignatureProperties;
-import io.github.douyayun.signature.storage.NonceConfigStorage;
-import io.github.douyayun.signature.storage.impl.DefaultNonceConfigStorageImpl;
+import io.github.douyayun.signature.storage.ConfigStorage;
+import io.github.douyayun.signature.storage.impl.DefaultConfigStorageImpl;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.boot.web.servlet.FilterRegistrationBean;
@@ -49,10 +49,10 @@ public class SignatureConfig {
     @Bean
     @ConditionalOnMissingBean(SignatureManager.class)
     public SignatureManager signatureManager() {
-        log.error("SignatureManager init...");
+        log.info("SignatureManager init...");
         SignatureManager signatureManager = new SignatureManager();
-        NonceConfigStorage defaultNonceConfigStorage = new DefaultNonceConfigStorageImpl(signatureProperties);
-        signatureManager.setNonceConfigStorage(defaultNonceConfigStorage);
+        ConfigStorage defaultConfigStorage = new DefaultConfigStorageImpl(signatureProperties);
+        signatureManager.setConfigStorage(defaultConfigStorage);
         return signatureManager;
     }
 

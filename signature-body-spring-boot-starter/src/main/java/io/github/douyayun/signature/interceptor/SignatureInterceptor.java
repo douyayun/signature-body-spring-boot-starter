@@ -56,20 +56,20 @@ public class SignatureInterceptor implements HandlerInterceptor {
         String timestamp = request.getHeader("timestamp");
         String nonce = request.getHeader("nonce");
         String sign = request.getHeader("sign");
-        log.info("signature url：{} method：{} appId：{} timestamp：{} nonce：{} sign：{}",
-                request.getRequestURL().toString(), method, appId, timestamp, nonce, sign);
+        log.info("signature url：{} method：{} appId：{} timestamp：{} nonce：{} sign：{}", request.getRequestURL().toString(), method, appId, timestamp, nonce, sign);
         Assert.isTrue(StringUtils.isNotBlank(appId), "appId不能为空");
         Assert.notNull(secret, "appId不存在");
-        Assert.isTrue(StringUtils.isNotBlank(timestamp), "timestamp不能为空");
+        Assert.isTrue(StringUtils.isNotBlank(timestamp), "timestamp不能为空(毫秒)");
         Assert.isTrue(StringUtils.isNotBlank(nonce), "nonce不能为空");
         Assert.isTrue(StringUtils.isNotBlank(sign), "sign不能为空");
         if (signatureProperties.isTimestampEnabled()) {
             long _timestamp = NumberUtils.toLong(timestamp);
-            Assert.isTrue(_timestamp <= 0, "timestamp错误");
+            Assert.isTrue(_timestamp > 0, "timestamp错误(毫秒)");
             if (Math.abs(System.currentTimeMillis() - _timestamp) > 1000 * signatureProperties.getTimestampValidityInSeconds()) {
                 Assert.isTrue(false, "timestamp已过期,有效期" + signatureProperties.getTimestampValidityInSeconds() + "秒");
             }
         }
+        Assert.isTrue(signatureManager.getConfigStorage().getTicket(appId, nonce, signatureProperties.getTimestampValidityInSeconds()), "nonce不能重复使用");
         Map<String, String[]> parameterMap = request.getParameterMap();
         log.info("signature parameter：" + JsonUtils.toJson(parameterMap));
         String parameterData = SignUtils.sortMapByKey(parameterMap);

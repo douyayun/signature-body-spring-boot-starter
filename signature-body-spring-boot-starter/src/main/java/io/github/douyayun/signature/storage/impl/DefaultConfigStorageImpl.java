@@ -1,7 +1,8 @@
 package io.github.douyayun.signature.storage.impl;
 
 import io.github.douyayun.signature.properties.SignatureProperties;
-import io.github.douyayun.signature.storage.NonceConfigStorage;
+import io.github.douyayun.signature.storage.ConfigStorage;
+import io.github.douyayun.signature.util.LocalCache;
 import lombok.extern.slf4j.Slf4j;
 
 import java.io.Serializable;
@@ -13,11 +14,11 @@ import java.io.Serializable;
  * @since 1.0.0
  */
 @Slf4j
-public class DefaultNonceConfigStorageImpl implements NonceConfigStorage, Serializable {
+public class DefaultConfigStorageImpl implements ConfigStorage, Serializable {
 
     private SignatureProperties signatureProperties;
 
-    public DefaultNonceConfigStorageImpl(SignatureProperties signatureProperties) {
+    public DefaultConfigStorageImpl(SignatureProperties signatureProperties) {
         log.info("DefaultNonceConfigStorageImpl...");
         this.signatureProperties = signatureProperties;
     }
@@ -32,6 +33,11 @@ public class DefaultNonceConfigStorageImpl implements NonceConfigStorage, Serial
      */
     @Override
     public boolean getTicket(String appId, String nonce, int expiresInSeconds) {
+        String key = appId + ":" + nonce;
+        if (!LocalCache.getInstance().containsKey(key)) {
+            LocalCache.getInstance().putValue(key, "", expiresInSeconds);
+            return true;
+        }
         return false;
     }
 }

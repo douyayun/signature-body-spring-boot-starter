@@ -1,6 +1,6 @@
 package io.github.douyayun.signature.manager;
 
-import io.github.douyayun.signature.storage.NonceConfigStorage;
+import io.github.douyayun.signature.storage.ConfigStorage;
 import lombok.Data;
 
 /**
@@ -12,6 +12,6 @@ import lombok.Data;
 @Data
 public class SignatureManager {
 
-    private NonceConfigStorage nonceConfigStorage;
+    private ConfigStorage configStorage;
 
 }

@@ -20,7 +20,7 @@ import java.util.List;
 public class SignatureProperties {
 
     /**
-     * 是否启用
+     * 是否开发调试模式
      */
     private boolean debug = false;
 

@@ -1,7 +1,7 @@
 package io.github.douyayun.signature.storage.impl;
 
 import io.github.douyayun.signature.properties.SignatureProperties;
-import io.github.douyayun.signature.storage.NonceConfigStorage;
+import io.github.douyayun.signature.storage.ConfigStorage;
 import lombok.extern.slf4j.Slf4j;
 
 import java.io.Serializable;
@@ -13,11 +13,11 @@ import java.io.Serializable;
  * @since 1.0.0
  */
 @Slf4j
-public class RedisNonceConfigStorageImpl implements NonceConfigStorage, Serializable {
+public class RedisConfigStorageImpl implements ConfigStorage, Serializable {
 
     private SignatureProperties signatureProperties;
 
-    public RedisNonceConfigStorageImpl(SignatureProperties signatureProperties) {
+    public RedisConfigStorageImpl(SignatureProperties signatureProperties) {
         log.info("RedisNonceConfigStorageImpl...");
         this.signatureProperties = signatureProperties;
     }

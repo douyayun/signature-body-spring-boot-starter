@@ -56,6 +56,9 @@ public class SignatureSecretManager {
      */
     public static void initSecret(List<SignatureProperties.Secret> secrets) {
         signSecretMap.clear();
+        if (secrets == null) {
+            return;
+        }
         secrets.forEach(item -> {
             signSecretMap.put(item.getAppId(), item.getAppSecret());
         });
