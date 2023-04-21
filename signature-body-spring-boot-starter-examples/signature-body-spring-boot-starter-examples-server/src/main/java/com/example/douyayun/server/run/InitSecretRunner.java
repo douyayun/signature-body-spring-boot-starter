@@ -1,8 +1,9 @@
 package com.example.douyayun.server.run;
 
-import io.github.douyayun.signature.manager.SignatureSecretManager;
 import io.github.douyayun.signature.properties.SignatureProperties;
+import io.github.douyayun.signature.storage.SecretStorage;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 
@@ -10,7 +11,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * TODO
+ * 初始化秘钥信息
  *
  * @author houp
  * @since 1.0.0
@@ -19,11 +20,9 @@ import java.util.List;
 @Slf4j
 public class InitSecretRunner implements CommandLineRunner {
 
-    /**
-     * Callback used to run the bean.
-     *
-     * @param args incoming main method arguments
-     */
+    @Autowired
+    private SecretStorage secretStorage;
+
     @Override
     public void run(String... args) {
         List<SignatureProperties.Secret> secrets = new ArrayList<>();
@@ -31,6 +30,7 @@ public class InitSecretRunner implements CommandLineRunner {
         secret.setAppId("1621923672504");
         secret.setAppSecret("f8c30adb67b14bc6a53b29b1de01b150");
         secrets.add(secret);
-        SignatureSecretManager.initSecret(secrets);
+        secretStorage.initSecret(secrets);
     }
+
 }

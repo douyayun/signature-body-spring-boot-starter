@@ -1,14 +1,10 @@
 package io.github.douyayun.signature.config;
 
-import io.github.douyayun.signature.manager.SignatureConfigStorageManager;
 import io.github.douyayun.signature.properties.SignatureProperties;
 import io.github.douyayun.signature.properties.StorageType;
-import io.github.douyayun.signature.storage.ConfigStorage;
-import io.github.douyayun.signature.storage.MemoryConfigStorage;
-import io.github.douyayun.signature.storage.RedisConfigStorage;
+import io.github.douyayun.signature.storage.*;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.redis.connection.RedisConnectionFactory;
@@ -32,14 +28,16 @@ public class SignatureStorageAutoConfiguration {
     @Autowired(required = false)
     private RedisConnectionFactory redisConnectionFactory;
 
-    @Bean
-    @ConditionalOnMissingBean(SignatureConfigStorageManager.class)
-    public SignatureConfigStorageManager signatureManager() {
-        SignatureConfigStorageManager signatureConfigStorageManager = new SignatureConfigStorageManager();
-        ConfigStorage configStorage = getConfigStorage();
-        signatureConfigStorageManager.setConfigStorage(configStorage);
-        return signatureConfigStorageManager;
-    }
+    // @Bean
+    // @ConditionalOnMissingBean(SignatureConfigStorageManager.class)
+    // public SignatureConfigStorageManager signatureManager() {
+    //     SignatureConfigStorageManager signatureConfigStorageManager = new SignatureConfigStorageManager();
+    //     signatureConfigStorageManager.setNonceStorage(getNonceStorage());
+    //     SecretStorage secretStorage = getSecretStorage();
+    //     signatureConfigStorageManager.setSecretStorage(secretStorage);
+    //     SignatureSecretManager.secretStorage = secretStorage;
+    //     return signatureConfigStorageManager;
+    // }
 
     @Bean
     public StringRedisTemplate getRedisTemplate(RedisConnectionFactory factory) {
@@ -48,13 +46,24 @@ public class SignatureStorageAutoConfiguration {
         return stringRedisTemplate;
     }
 
-    private ConfigStorage getConfigStorage() {
+    @Bean
+    public NonceStorage getNonceStorage() {
         if (signatureProperties.getSecretStorageType() == StorageType.memory) {
-            return new MemoryConfigStorage();
+            return new MemoryNonceStorage();
         } else if (signatureProperties.getSecretStorageType() == StorageType.redis) {
-            return new RedisConfigStorage(getRedisTemplate(redisConnectionFactory));
+            return new RedisNonceStorage(getRedisTemplate(redisConnectionFactory));
         }
-        return new MemoryConfigStorage();
+        return new MemoryNonceStorage();
+    }
+
+    @Bean
+    public SecretStorage getSecretStorage() {
+        if (signatureProperties.getSecretStorageType() == StorageType.memory) {
+            return new MemorySecretStorage();
+        } else if (signatureProperties.getSecretStorageType() == StorageType.redis) {
+            return new RedisSecretStorage(getRedisTemplate(redisConnectionFactory));
+        }
+        return new MemorySecretStorage();
     }
 
 }

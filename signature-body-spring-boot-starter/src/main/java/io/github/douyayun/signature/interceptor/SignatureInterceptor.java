@@ -1,9 +1,9 @@
 package io.github.douyayun.signature.interceptor;
 
 import io.github.douyayun.signature.exception.SignatureException;
-import io.github.douyayun.signature.manager.SignatureConfigStorageManager;
-import io.github.douyayun.signature.manager.SignatureSecretManager;
 import io.github.douyayun.signature.properties.SignatureProperties;
+import io.github.douyayun.signature.storage.NonceStorage;
+import io.github.douyayun.signature.storage.SecretStorage;
 import io.github.douyayun.signature.util.JsonUtils;
 import io.github.douyayun.signature.util.RequestUtils;
 import io.github.douyayun.signature.util.SignUtils;
@@ -33,13 +33,18 @@ public class SignatureInterceptor implements HandlerInterceptor {
      */
     private SignatureProperties signatureProperties;
 
-    private SignatureConfigStorageManager signatureConfigStorageManager;
+    private SecretStorage secretStorage;
 
-    public SignatureInterceptor(SignatureProperties signatureProperties, SignatureConfigStorageManager signatureConfigStorageManager) {
+    private NonceStorage nonceStorage;
+    
+    // private SignatureConfigStorageManager signatureConfigStorageManager;
+
+    public SignatureInterceptor(SignatureProperties signatureProperties, NonceStorage nonceStorage, SecretStorage secretStorage) {
         this.signatureProperties = signatureProperties;
-        this.signatureConfigStorageManager = signatureConfigStorageManager;
+        this.nonceStorage = nonceStorage;
+        this.secretStorage = secretStorage;
         if (signatureProperties.getSecret() != null && !signatureProperties.getSecret().isEmpty()) {
-            SignatureSecretManager.initSecret(signatureProperties.getSecret());
+            secretStorage.initSecret(signatureProperties.getSecret());
         }
     }
 
@@ -51,7 +56,7 @@ public class SignatureInterceptor implements HandlerInterceptor {
         String jsonData = "";
         String method = request.getMethod().toUpperCase();
         String appId = request.getHeader("appId");
-        SignatureProperties.Secret secret = SignatureSecretManager.getSecret(appId);
+        SignatureProperties.Secret secret = secretStorage.getSecret(appId);
         String appSecret = secret == null ? "" : secret.getAppSecret();
         String timestamp = request.getHeader("timestamp");
         String nonce = request.getHeader("nonce");
@@ -69,7 +74,7 @@ public class SignatureInterceptor implements HandlerInterceptor {
                 Assert.isTrue(false, "timestamp已过期,有效期" + signatureProperties.getTimestampValidityInSeconds() + "秒");
             }
         }
-        Assert.isTrue(signatureConfigStorageManager.getConfigStorage().uniqueRequest(appId, nonce, signatureProperties.getTimestampValidityInSeconds()), "nonce不能重复使用");
+        Assert.isTrue(nonceStorage.uniqueRequest(appId, nonce, signatureProperties.getTimestampValidityInSeconds()), "nonce不能重复使用");
         Map<String, String[]> parameterMap = request.getParameterMap();
         log.info("signature parameter：" + JsonUtils.toJson(parameterMap));
         String parameterData = SignUtils.sortMapByKey(parameterMap);

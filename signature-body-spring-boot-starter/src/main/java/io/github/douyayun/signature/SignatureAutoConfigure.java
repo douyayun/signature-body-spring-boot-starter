@@ -3,8 +3,9 @@ package io.github.douyayun.signature;
 import io.github.douyayun.signature.config.SignatureStorageAutoConfiguration;
 import io.github.douyayun.signature.config.SignatureWebAutoConfiguration;
 import io.github.douyayun.signature.interceptor.SignatureInterceptor;
-import io.github.douyayun.signature.manager.SignatureConfigStorageManager;
 import io.github.douyayun.signature.properties.SignatureProperties;
+import io.github.douyayun.signature.storage.NonceStorage;
+import io.github.douyayun.signature.storage.SecretStorage;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
@@ -38,8 +39,14 @@ public class SignatureAutoConfigure implements WebMvcConfigurer {
     @Resource
     private SignatureProperties signatureProperties;
 
+    // @Resource
+    // private SignatureConfigStorageManager signatureConfigStorageManager;
+
     @Resource
-    private SignatureConfigStorageManager signatureConfigStorageManager;
+    private SecretStorage secretStorage;
+
+    @Resource
+    private NonceStorage nonceStorage;
 
     /**
      * 配置签名拦截器
@@ -50,7 +57,7 @@ public class SignatureAutoConfigure implements WebMvcConfigurer {
     public void addInterceptors(InterceptorRegistry registry) {
         Assert.notEmpty(signatureProperties.getSecret(), "signature.includePaths配置不能为空");
         List<String> excludePaths = signatureProperties.getExcludePaths();
-        InterceptorRegistration interceptorRegistration = registry.addInterceptor(new SignatureInterceptor(signatureProperties, signatureConfigStorageManager))
+        InterceptorRegistration interceptorRegistration = registry.addInterceptor(new SignatureInterceptor(signatureProperties, nonceStorage, secretStorage))
                 .addPathPatterns(signatureProperties.getIncludePaths());
         if (excludePaths != null && !excludePaths.isEmpty()) {
             interceptorRegistration.excludePathPatterns(excludePaths);

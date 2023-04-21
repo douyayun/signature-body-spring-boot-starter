@@ -1,9 +1,10 @@
 package com.example.douyayun.server.controller;
 
-import io.github.douyayun.signature.manager.SignatureSecretManager;
 import io.github.douyayun.signature.properties.SignatureProperties;
+import io.github.douyayun.signature.storage.SecretStorage;
 import io.github.douyayun.signature.util.LocalCache;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.util.StopWatch;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -21,6 +22,9 @@ import java.util.UUID;
 @RequestMapping()
 @Slf4j
 public class IndexController {
+
+    @Autowired
+    private SecretStorage secretStorage;
 
     private static Long num = 0L;
 
@@ -46,22 +50,28 @@ public class IndexController {
     }
 
     @GetMapping("/s/a")
-    public String index2() {
+    public String appendSecret() {
         SignatureProperties.Secret secret = new SignatureProperties.Secret();
         secret.setAppId("1621923672506");
         secret.setAppSecret("f8c30adb67b14bc6a53b29b1de01b150");
-        SignatureSecretManager.appendSecret(secret);
-        return SignatureSecretManager.getAllSecret().size() + "";
+        secretStorage.appendSecret(secret);
+        return secretStorage.getAllSecret().size() + "";
+    }
+
+    @GetMapping("/s/removeAllSecret")
+    public String removeAllSecret() {
+        secretStorage.removeAllSecret();
+        return secretStorage.getAllSecret().size() + "";
     }
 
     @GetMapping("/s/s")
     public String index3() {
-        return SignatureSecretManager.getAllSecret().size() + "";
+        return secretStorage.getAllSecret().size() + "";
     }
 
     @GetMapping("/s/r")
     public String index4() {
-        SignatureSecretManager.removeAllSecret();
-        return SignatureSecretManager.getAllSecret().size() + "";
+        secretStorage.removeAllSecret();
+        return secretStorage.getAllSecret().size() + "";
     }
 }

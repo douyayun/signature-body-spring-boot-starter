@@ -12,14 +12,14 @@ import java.io.Serializable;
  * @since 1.0.0
  */
 @Slf4j
-public class MemoryConfigStorage implements ConfigStorage, Serializable {
+public class MemoryNonceStorage implements NonceStorage, Serializable {
 
-    public MemoryConfigStorage() {
+    public MemoryNonceStorage() {
         log.info("MemoryConfigStorage...");
     }
 
     /**
-     * 获取票据  锁定当前appId的nonce. 防止重放攻击
+     * 唯一请求  锁定当前appId的nonce. 防止重放攻击
      *
      * @param appId            appId值
      * @param nonce            nonce值

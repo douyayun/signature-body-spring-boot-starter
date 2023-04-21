@@ -13,17 +13,17 @@ import java.util.concurrent.TimeUnit;
  * @since 1.0.0
  */
 @Slf4j
-public class RedisConfigStorage implements ConfigStorage, Serializable {
+public class RedisNonceStorage implements NonceStorage, Serializable {
 
     private StringRedisTemplate stringRedisTemplate;
 
-    public RedisConfigStorage(StringRedisTemplate stringRedisTemplate) {
+    public RedisNonceStorage(StringRedisTemplate stringRedisTemplate) {
         log.info("RedisConfigStorage...");
         this.stringRedisTemplate = stringRedisTemplate;
     }
 
     /**
-     * 获取票据  锁定当前appId的nonce. 防止重放攻击
+     * 唯一请求  锁定当前appId的nonce. 防止重放攻击
      *
      * @param appId            appId值
      * @param nonce            nonce值
