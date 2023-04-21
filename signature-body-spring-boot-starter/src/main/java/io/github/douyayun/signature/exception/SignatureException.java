@@ -10,7 +10,6 @@ public class SignatureException extends RuntimeException {
 
     /**
      * 全局错误码
-     *
      */
     private Integer code = 1000;
     /**
@@ -22,6 +21,10 @@ public class SignatureException extends RuntimeException {
      * 空构造方法，避免反序列化问题
      */
     public SignatureException() {
+    }
+
+    public SignatureException(String message) {
+        this.message = message;
     }
 
     public SignatureException(Integer code, String message) {
