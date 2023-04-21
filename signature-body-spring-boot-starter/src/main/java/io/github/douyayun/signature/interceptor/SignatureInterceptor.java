@@ -1,7 +1,7 @@
 package io.github.douyayun.signature.interceptor;
 
 import io.github.douyayun.signature.exception.SignatureException;
-import io.github.douyayun.signature.manager.SignatureManager;
+import io.github.douyayun.signature.manager.SignatureConfigStorageManager;
 import io.github.douyayun.signature.manager.SignatureSecretManager;
 import io.github.douyayun.signature.properties.SignatureProperties;
 import io.github.douyayun.signature.util.JsonUtils;
@@ -33,11 +33,11 @@ public class SignatureInterceptor implements HandlerInterceptor {
      */
     private SignatureProperties signatureProperties;
 
-    private SignatureManager signatureManager;
+    private SignatureConfigStorageManager signatureConfigStorageManager;
 
-    public SignatureInterceptor(SignatureProperties signatureProperties, SignatureManager signatureManager) {
+    public SignatureInterceptor(SignatureProperties signatureProperties, SignatureConfigStorageManager signatureConfigStorageManager) {
         this.signatureProperties = signatureProperties;
-        this.signatureManager = signatureManager;
+        this.signatureConfigStorageManager = signatureConfigStorageManager;
         if (signatureProperties.getSecret() != null && !signatureProperties.getSecret().isEmpty()) {
             SignatureSecretManager.initSecret(signatureProperties.getSecret());
         }
@@ -69,7 +69,7 @@ public class SignatureInterceptor implements HandlerInterceptor {
                 Assert.isTrue(false, "timestamp已过期,有效期" + signatureProperties.getTimestampValidityInSeconds() + "秒");
             }
         }
-        Assert.isTrue(signatureManager.getConfigStorage().getTicket(appId, nonce, signatureProperties.getTimestampValidityInSeconds()), "nonce不能重复使用");
+        Assert.isTrue(signatureConfigStorageManager.getConfigStorage().uniqueRequest(appId, nonce, signatureProperties.getTimestampValidityInSeconds()), "nonce不能重复使用");
         Map<String, String[]> parameterMap = request.getParameterMap();
         log.info("signature parameter：" + JsonUtils.toJson(parameterMap));
         String parameterData = SignUtils.sortMapByKey(parameterMap);

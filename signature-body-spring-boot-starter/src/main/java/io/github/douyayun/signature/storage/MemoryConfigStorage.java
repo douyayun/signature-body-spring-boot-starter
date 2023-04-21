@@ -1,6 +1,5 @@
 package io.github.douyayun.signature.storage;
 
-import io.github.douyayun.signature.properties.SignatureProperties;
 import io.github.douyayun.signature.util.LocalCache;
 import lombok.extern.slf4j.Slf4j;
 
@@ -13,13 +12,10 @@ import java.io.Serializable;
  * @since 1.0.0
  */
 @Slf4j
-public class DefaultConfigStorage implements ConfigStorage, Serializable {
+public class MemoryConfigStorage implements ConfigStorage, Serializable {
 
-    private SignatureProperties signatureProperties;
-
-    public DefaultConfigStorage(SignatureProperties signatureProperties) {
-        log.info("DefaultNonceConfigStorageImpl...");
-        this.signatureProperties = signatureProperties;
+    public MemoryConfigStorage() {
+        log.info("MemoryConfigStorage...");
     }
 
     /**
@@ -31,7 +27,7 @@ public class DefaultConfigStorage implements ConfigStorage, Serializable {
      * @return 返回true表示可以使用；false表示已经存在，不能使用
      */
     @Override
-    public boolean getTicket(String appId, String nonce, int expiresInSeconds) {
+    public boolean uniqueRequest(String appId, String nonce, int expiresInSeconds) {
         String key = appId + ":" + nonce;
         if (!LocalCache.getInstance().containsKey(key)) {
             LocalCache.getInstance().putValue(key, "", expiresInSeconds);
