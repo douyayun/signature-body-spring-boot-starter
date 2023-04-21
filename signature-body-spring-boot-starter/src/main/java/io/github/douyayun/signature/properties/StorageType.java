@@ -6,6 +6,6 @@ package io.github.douyayun.signature.properties;
 public enum StorageType {
     memory, redis;
 
-    private StorageType() {
+    StorageType() {
     }
 }

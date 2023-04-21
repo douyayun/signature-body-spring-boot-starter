@@ -17,7 +17,6 @@ import java.util.concurrent.TimeUnit;
  * @since 1.0.0
  **/
 public class LocalCache {
-
     private static final Logger log = LoggerFactory.getLogger(LocalCache.class);
 
     /**

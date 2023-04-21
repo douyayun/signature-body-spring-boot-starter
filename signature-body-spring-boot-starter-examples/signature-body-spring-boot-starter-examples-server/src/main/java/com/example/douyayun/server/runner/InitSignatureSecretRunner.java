@@ -1,4 +1,4 @@
-package com.example.douyayun.server.run;
+package com.example.douyayun.server.runner;
 
 import io.github.douyayun.signature.properties.SignatureProperties;
 import io.github.douyayun.signature.storage.SecretStorage;
@@ -18,7 +18,7 @@ import java.util.List;
  **/
 @Component
 @Slf4j
-public class InitSecretRunner implements CommandLineRunner {
+public class InitSignatureSecretRunner implements CommandLineRunner {
 
     @Autowired
     private SecretStorage secretStorage;
@@ -31,6 +31,11 @@ public class InitSecretRunner implements CommandLineRunner {
         secret.setAppSecret("f8c30adb67b14bc6a53b29b1de01b150");
         secrets.add(secret);
         secretStorage.initSecret(secrets);
+        // secretStorage.appendSecret(secret);
+        // secretStorage.getSecret("1621923672504");
+        // secretStorage.getAllSecret();
+        // secretStorage.removeSecret("1621923672504");
+        // secretStorage.removeAllSecret();
     }
 
 }

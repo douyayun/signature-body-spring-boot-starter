@@ -2,7 +2,8 @@ package io.github.douyayun.signature.config;
 
 import io.github.douyayun.signature.filter.RequestBodyReadFilter;
 import io.github.douyayun.signature.properties.SignatureProperties;
-import lombok.extern.slf4j.Slf4j;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -18,8 +19,8 @@ import java.util.List;
  * @since 1.0.0
  **/
 @Configuration
-@Slf4j
 public class SignatureWebAutoConfiguration {
+    private static final Logger log = LoggerFactory.getLogger(SignatureWebAutoConfiguration.class);
 
     @Resource
     private SignatureProperties signatureProperties;

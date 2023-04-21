@@ -1,6 +1,8 @@
 package io.github.douyayun.signature.util;
 
 import org.apache.commons.codec.digest.DigestUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.*;
 
@@ -11,6 +13,7 @@ import java.util.*;
  * @since 1.0.0
  */
 public class SignUtils {
+    private static final Logger log = LoggerFactory.getLogger(SignUtils.class);
 
     private SignUtils() {
     }

@@ -4,8 +4,9 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.core.JsonGenerator;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.*;
-import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
 import java.text.SimpleDateFormat;
@@ -18,8 +19,8 @@ import java.util.Map;
  * @author houp
  * @since 1.0.0
  */
-@Slf4j
 public final class JsonUtils {
+    private static final Logger log = LoggerFactory.getLogger(JsonUtils.class);
 
     /**
      * 日期格式化
@@ -28,15 +29,15 @@ public final class JsonUtils {
     private static ObjectMapper MAPPER = new ObjectMapper();
 
     static {
-        //对象的所有字段全部列入
+        // 对象的所有字段全部列入
         MAPPER.setSerializationInclusion(JsonInclude.Include.ALWAYS);
-        //取消默认转换timestamps形式
+        // 取消默认转换timestamps形式
         MAPPER.configure(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS, false);
-        //忽略空Bean转json的错误
+        // 忽略空Bean转json的错误
         MAPPER.configure(SerializationFeature.FAIL_ON_EMPTY_BEANS, false);
-        //所有的日期格式都统一为以下的样式，即yyyy-MM-dd HH:mm:ss
+        // 所有的日期格式都统一为以下的样式，即yyyy-MM-dd HH:mm:ss
         MAPPER.setDateFormat(new SimpleDateFormat(STANDARD_FORMAT));
-        //忽略 在json字符串中存在，但是在java对象中不存在对应属性的情况。防止错误
+        // 忽略 在json字符串中存在，但是在java对象中不存在对应属性的情况。防止错误
         MAPPER.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
     }
 
@@ -75,7 +76,7 @@ public final class JsonUtils {
             MAPPER.getSerializerProvider().setNullValueSerializer(new JsonSerializer<Object>() {
                 @Override
                 public void serialize(Object param, JsonGenerator jsonGenerator, SerializerProvider serializerProvider) throws IOException {
-                    //设置返回null转为 空字符串""
+                    // 设置返回null转为 空字符串""
                     jsonGenerator.writeString("");
                 }
             });

@@ -1,7 +1,8 @@
 package io.github.douyayun.signature.util;
 
 import com.google.common.cache.*;
-import lombok.extern.slf4j.Slf4j;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
@@ -9,8 +10,8 @@ import java.util.concurrent.TimeUnit;
 /**
  * 功能描述
  */
-@Slf4j
 public class CacheUtils {
+    private static final Logger log = LoggerFactory.getLogger(CacheUtils.class);
 
     /**
      * 缓存项最大数量
@@ -56,21 +57,21 @@ public class CacheUtils {
      */
     private static LoadingCache<String, String> loadCache(CacheLoader<String, String> cacheLoader) throws Exception {
         LoadingCache<String, String> cache = CacheBuilder.newBuilder()
-                //缓存池大小，在缓存项接近该大小时， Guava开始回收旧的缓存项
+                // 缓存池大小，在缓存项接近该大小时， Guava开始回收旧的缓存项
                 .maximumSize(GUAVA_CACHE_SIZE)
-                //设置时间对象没有被读/写访问则对象从内存中删除(在另外的线程里面不定期维护)
+                // 设置时间对象没有被读/写访问则对象从内存中删除(在另外的线程里面不定期维护)
                 .expireAfterAccess(GUAVA_CACHE_SECONDS, TimeUnit.SECONDS)
                 // 设置缓存在写入之后 设定时间 后失效
                 .expireAfterWrite(GUAVA_CACHE_SECONDS, TimeUnit.SECONDS)
-                //移除监听器,缓存项被移除时会触发
+                // 移除监听器,缓存项被移除时会触发
                 .removalListener(new RemovalListener<String, String>() {
                     @Override
                     public void onRemoval(RemovalNotification<String, String> rn) {
-                        //逻辑操作
+                        // 逻辑操作
                         log.info("移除key：{}", rn.getKey());
                     }
                 })
-                //开启Guava Cache的统计功能
+                // 开启Guava Cache的统计功能
                 .recordStats()
                 .build(cacheLoader);
         return cache;

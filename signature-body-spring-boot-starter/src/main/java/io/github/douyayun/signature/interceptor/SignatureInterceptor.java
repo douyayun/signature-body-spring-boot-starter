@@ -8,9 +8,10 @@ import io.github.douyayun.signature.util.JsonUtils;
 import io.github.douyayun.signature.util.RequestUtils;
 import io.github.douyayun.signature.util.SignUtils;
 import io.github.douyayun.signature.wrapper.RequestWrapper;
-import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.math.NumberUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.util.Assert;
 import org.springframework.web.method.HandlerMethod;
 import org.springframework.web.servlet.HandlerInterceptor;
@@ -25,8 +26,8 @@ import java.util.Map;
  * @author houp
  * @since 1.0.0
  */
-@Slf4j
 public class SignatureInterceptor implements HandlerInterceptor {
+    private static final Logger log = LoggerFactory.getLogger(SignatureInterceptor.class);
 
     /**
      * 签名配置

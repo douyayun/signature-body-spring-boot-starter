@@ -1,6 +1,7 @@
 package io.github.douyayun.signature.storage;
 
-import lombok.extern.slf4j.Slf4j;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.data.redis.core.StringRedisTemplate;
 
 import java.io.Serializable;
@@ -12,8 +13,8 @@ import java.util.concurrent.TimeUnit;
  * @author houp
  * @since 1.0.0
  */
-@Slf4j
 public class RedisNonceStorage implements NonceStorage, Serializable {
+    private static final Logger log = LoggerFactory.getLogger(RedisNonceStorage.class);
 
     private StringRedisTemplate stringRedisTemplate;
 

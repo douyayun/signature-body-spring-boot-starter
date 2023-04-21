@@ -1,6 +1,7 @@
 package io.github.douyayun.signature.wrapper;
 
-import lombok.extern.slf4j.Slf4j;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import javax.servlet.ReadListener;
 import javax.servlet.ServletInputStream;
@@ -17,8 +18,9 @@ import java.nio.charset.Charset;
  * @author houp
  * @since 1.0.0
  */
-@Slf4j
 public class RequestWrapper extends HttpServletRequestWrapper {
+    private static final Logger log = LoggerFactory.getLogger(RequestWrapper.class);
+
     /**
      * 存储body数据的容器
      */

@@ -1,5 +1,7 @@
 package io.github.douyayun.signature.util;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.http.MediaType;
 
 import javax.servlet.ServletRequest;
@@ -11,6 +13,7 @@ import javax.servlet.ServletRequest;
  * @since 1.0.0
  */
 public class RequestUtils {
+    private static final Logger log = LoggerFactory.getLogger(RequestUtils.class);
 
     private RequestUtils() {
 

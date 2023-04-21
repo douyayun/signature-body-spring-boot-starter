@@ -1,6 +1,8 @@
 package io.github.douyayun.signature.storage;
 
 import io.github.douyayun.signature.properties.SignatureProperties;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -15,6 +17,7 @@ import java.util.concurrent.ConcurrentHashMap;
  * @since 1.0.0
  **/
 public class MemorySecretStorage implements SecretStorage, Serializable {
+    private static final Logger log = LoggerFactory.getLogger(MemorySecretStorage.class);
 
     /**
      * 签名密钥

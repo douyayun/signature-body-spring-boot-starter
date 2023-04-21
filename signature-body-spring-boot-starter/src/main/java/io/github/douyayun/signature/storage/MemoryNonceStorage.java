@@ -1,7 +1,8 @@
 package io.github.douyayun.signature.storage;
 
 import io.github.douyayun.signature.util.LocalCache;
-import lombok.extern.slf4j.Slf4j;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.io.Serializable;
 
@@ -11,8 +12,8 @@ import java.io.Serializable;
  * @author houp
  * @since 1.0.0
  */
-@Slf4j
 public class MemoryNonceStorage implements NonceStorage, Serializable {
+    private static final Logger log = LoggerFactory.getLogger(MemoryNonceStorage.class);
 
     public MemoryNonceStorage() {
         log.info("MemoryConfigStorage...");

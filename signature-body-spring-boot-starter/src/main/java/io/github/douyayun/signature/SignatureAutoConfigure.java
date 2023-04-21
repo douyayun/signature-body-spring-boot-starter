@@ -6,7 +6,8 @@ import io.github.douyayun.signature.interceptor.SignatureInterceptor;
 import io.github.douyayun.signature.properties.SignatureProperties;
 import io.github.douyayun.signature.storage.NonceStorage;
 import io.github.douyayun.signature.storage.SecretStorage;
-import lombok.extern.slf4j.Slf4j;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnWebApplication;
@@ -33,8 +34,8 @@ import java.util.List;
 @EnableConfigurationProperties(SignatureProperties.class)
 @ConditionalOnProperty(prefix = "signature", value = "enabled", havingValue = "true")
 @Import({SignatureWebAutoConfiguration.class, SignatureStorageAutoConfiguration.class})
-@Slf4j
 public class SignatureAutoConfigure implements WebMvcConfigurer {
+    private static final Logger log = LoggerFactory.getLogger(SignatureAutoConfigure.class);
 
     @Resource
     private SignatureProperties signatureProperties;
