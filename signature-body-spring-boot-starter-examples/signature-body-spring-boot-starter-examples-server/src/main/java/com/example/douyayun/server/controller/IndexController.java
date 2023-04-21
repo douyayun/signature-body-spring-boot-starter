@@ -53,7 +53,7 @@ public class IndexController {
     public String appendSecret() {
         SignatureProperties.Secret secret = new SignatureProperties.Secret();
         secret.setAppId("1621923672506");
-        secret.setAppSecret("f8c30adb67b14bc6a53b29b1de01b150");
+        secret.setAppSecret("f8c30adb67b14bc6a53b29b1de01b506");
         secretStorage.appendSecret(secret);
         return secretStorage.getAllSecret().size() + "";
     }

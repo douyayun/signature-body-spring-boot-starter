@@ -36,7 +36,7 @@ public class SignatureInterceptor implements HandlerInterceptor {
     private SecretStorage secretStorage;
 
     private NonceStorage nonceStorage;
-    
+
     // private SignatureConfigStorageManager signatureConfigStorageManager;
 
     public SignatureInterceptor(SignatureProperties signatureProperties, NonceStorage nonceStorage, SecretStorage secretStorage) {
@@ -88,7 +88,7 @@ public class SignatureInterceptor implements HandlerInterceptor {
         String signData = SignUtils.getSign(noSign);
         log.info("signature 待签名字符串：{},本机签名：{},签名参数：{}", noSign, signData, sign);
         if (!sign.equalsIgnoreCase(signData) && !signatureProperties.isDebug()) {
-            throw new SignatureException(1000, "sign签名错误");
+            throw new SignatureException("sign签名错误");
         }
         return true;
     }
