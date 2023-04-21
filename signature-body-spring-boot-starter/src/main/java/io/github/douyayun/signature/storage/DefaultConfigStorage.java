@@ -1,7 +1,7 @@
-package io.github.douyayun.signature.storage.impl;
+package io.github.douyayun.signature.storage;
 
 import io.github.douyayun.signature.properties.SignatureProperties;
-import io.github.douyayun.signature.storage.ConfigStorage;
+import io.github.douyayun.signature.util.LocalCache;
 import lombok.extern.slf4j.Slf4j;
 
 import java.io.Serializable;
@@ -13,12 +13,12 @@ import java.io.Serializable;
  * @since 1.0.0
  */
 @Slf4j
-public class RedisConfigStorageImpl implements ConfigStorage, Serializable {
+public class DefaultConfigStorage implements ConfigStorage, Serializable {
 
     private SignatureProperties signatureProperties;
 
-    public RedisConfigStorageImpl(SignatureProperties signatureProperties) {
-        log.info("RedisNonceConfigStorageImpl...");
+    public DefaultConfigStorage(SignatureProperties signatureProperties) {
+        log.info("DefaultNonceConfigStorageImpl...");
         this.signatureProperties = signatureProperties;
     }
 
@@ -32,6 +32,11 @@ public class RedisConfigStorageImpl implements ConfigStorage, Serializable {
      */
     @Override
     public boolean getTicket(String appId, String nonce, int expiresInSeconds) {
+        String key = appId + ":" + nonce;
+        if (!LocalCache.getInstance().containsKey(key)) {
+            LocalCache.getInstance().putValue(key, "", expiresInSeconds);
+            return true;
+        }
         return false;
     }
 }

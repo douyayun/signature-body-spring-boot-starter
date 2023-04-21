@@ -50,6 +50,11 @@ public class SignatureProperties {
     private List<String> excludePaths;
 
     /**
+     * 秘钥存储类型
+     */
+    private StorageType secretStorageType = StorageType.memory;
+
+    /**
      * 签名密钥
      */
     private List<Secret> secret;
