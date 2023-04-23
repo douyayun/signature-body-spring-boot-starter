@@ -44,6 +44,16 @@ public class SignatureProperties {
     private List<String> excludePaths;
 
     /**
+     * 签名类型
+     */
+    private SignType signType = SignType.SM2;
+
+    /**
+     * 平台秘钥
+     */
+    private PlatformKey platformKey;
+
+    /**
      * 秘钥存储类型
      */
     private StorageType secretStorageType = StorageType.memory;
@@ -101,6 +111,22 @@ public class SignatureProperties {
         this.excludePaths = excludePaths;
     }
 
+    public SignType getSignType() {
+        return signType;
+    }
+
+    public void setSignType(SignType signType) {
+        this.signType = signType;
+    }
+
+    public PlatformKey getPlatformKey() {
+        return platformKey;
+    }
+
+    public void setPlatformKey(PlatformKey platformKey) {
+        this.platformKey = platformKey;
+    }
+
     public StorageType getSecretStorageType() {
         return secretStorageType;
     }
@@ -118,26 +144,72 @@ public class SignatureProperties {
     }
 
     /**
+     * 平台秘钥
+     */
+    public static class PlatformKey {
+
+        /**
+         * 平台公钥
+         */
+        private String publicKey;
+
+        /**
+         * 平台私钥
+         */
+        private String privateKey;
+
+        public PlatformKey() {
+        }
+
+        public String getPublicKey() {
+            return publicKey;
+        }
+
+        public void setPublicKey(String publicKey) {
+            this.publicKey = publicKey;
+        }
+
+        public String getPrivateKey() {
+            return privateKey;
+        }
+
+        public void setPrivateKey(String privateKey) {
+            this.privateKey = privateKey;
+        }
+    }
+
+    /**
      * 签名密钥
      */
     public static class Secret {
 
         /**
-         * 客户端id
+         * 应用id
          */
         private String appId;
 
         /**
-         * 签名密钥
+         * 应用密钥
          */
         private String appSecret;
+
+        /**
+         * 应用公钥
+         */
+        private String publicKey;
+
+        // /**
+        //  * 应用私钥
+        //  */
+        // private String privateKey;
 
         public Secret() {
         }
 
-        public Secret(String appId, String appSecret) {
+        public Secret(String appId, String appSecret, String publicKey) {
             this.appId = appId;
             this.appSecret = appSecret;
+            this.publicKey = publicKey;
         }
 
         public String getAppId() {
@@ -154,6 +226,14 @@ public class SignatureProperties {
 
         public void setAppSecret(String appSecret) {
             this.appSecret = appSecret;
+        }
+
+        public String getPublicKey() {
+            return publicKey;
+        }
+
+        public void setPublicKey(String publicKey) {
+            this.publicKey = publicKey;
         }
     }
 

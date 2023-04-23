@@ -26,7 +26,7 @@ public class SignUtils {
     public static String getSign(String data) {
         // commons-codec
         // return DigestUtils.md5Hex(data).toLowerCase();
-        return EncodeUtils.md5(data).toLowerCase();
+        return Md5Utils.md5(data).toLowerCase();
     }
 
     /**

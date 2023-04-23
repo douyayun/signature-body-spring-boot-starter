@@ -87,12 +87,14 @@ public class InitSignatureSecretRunner implements CommandLineRunner {
 
 }
 ```
+
 ### sign签名规则：
 
 ```
  String noSign = appId + timestamp + nonce + parameterData + jsonData + appSecret;
  String sign = Md5(noSign);
 ```
+
 1、parameterData为请求参数包含url中的query和form表单中的参数，并按照参数名ASCII码从小到大排序，按照key=value的格式生成键值对（即key1=value1&key2=value2&key3=value3）拼接成字符串parameterData<br>
 2、jsonData为请求体中的json数据，此数据原封不动的通过接口传递至接口中<br>
 
@@ -154,3 +156,7 @@ http://localhost:8000/test1/post/2?t=aaaa
 
 ◆ 参数名ASCII码从小到大排序（字典序）<br>
 ◆ 参数名区分大小写<br>
+
+### 工具
+
+https://the-x.cn/cryptography/Sm2.aspx

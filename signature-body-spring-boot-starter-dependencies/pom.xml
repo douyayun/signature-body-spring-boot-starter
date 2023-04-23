@@ -16,6 +16,7 @@
         <flatten-maven-plugin.version>1.2.7</flatten-maven-plugin.version>
         <spring.boot.version>2.7.8</spring.boot.version>
         <commons-lang3.version>3.8.1</commons-lang3.version>
+        <bouncycastle.version>1.72</bouncycastle.version>
         <!-- <commons-codec.version>1.15</commons-codec.version> -->
         <!-- <lombok.version>1.18.24</lombok.version> -->
         <!-- <guava.version>31.1-jre</guava.version> -->
@@ -42,6 +43,13 @@
                 <groupId>org.apache.commons</groupId>
                 <artifactId>commons-lang3</artifactId>
                 <version>${commons-lang3.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.bouncycastle</groupId>
+                <artifactId>bcpkix-jdk15to18</artifactId>
+                <version>${bouncycastle.version}</version>
+                <scope>compile</scope>
+                <optional>true</optional>
             </dependency>
             <!-- <dependency> -->
             <!--     <groupId>commons-codec</groupId> -->

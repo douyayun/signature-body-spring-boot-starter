@@ -22,7 +22,7 @@ public class MemorySecretStorage implements SecretStorage, Serializable {
     /**
      * 签名密钥
      */
-    private static Map<String, String> signSecretMap = new ConcurrentHashMap<>();
+    private static Map<String, SignatureProperties.Secret> signSecretMap = new ConcurrentHashMap<>();
 
     /**
      * 获取所有秘钥
@@ -32,8 +32,8 @@ public class MemorySecretStorage implements SecretStorage, Serializable {
     @Override
     public List<SignatureProperties.Secret> getAllSecret() {
         List<SignatureProperties.Secret> list = new ArrayList<>();
-        for (Map.Entry<String, String> item : signSecretMap.entrySet()) {
-            list.add(new SignatureProperties.Secret(item.getKey(), item.getValue()));
+        for (Map.Entry<String, SignatureProperties.Secret> item : signSecretMap.entrySet()) {
+            list.add(item.getValue());
         }
         return list;
     }
@@ -50,7 +50,7 @@ public class MemorySecretStorage implements SecretStorage, Serializable {
             return null;
         }
         if (signSecretMap.containsKey(appId)) {
-            return new SignatureProperties.Secret(appId, signSecretMap.get(appId));
+            return signSecretMap.get(appId);
         }
         return null;
     }
@@ -67,7 +67,7 @@ public class MemorySecretStorage implements SecretStorage, Serializable {
             return;
         }
         secrets.forEach(item -> {
-            signSecretMap.put(item.getAppId(), item.getAppSecret());
+            signSecretMap.put(item.getAppId(), item);
         });
     }
 
@@ -78,7 +78,7 @@ public class MemorySecretStorage implements SecretStorage, Serializable {
      */
     @Override
     public void appendSecret(SignatureProperties.Secret secret) {
-        signSecretMap.put(secret.getAppId(), secret.getAppSecret());
+        signSecretMap.put(secret.getAppId(), secret);
     }
 
     /**

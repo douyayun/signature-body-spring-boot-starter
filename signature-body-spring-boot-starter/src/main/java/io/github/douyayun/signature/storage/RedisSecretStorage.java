@@ -1,6 +1,7 @@
 package io.github.douyayun.signature.storage;
 
 import io.github.douyayun.signature.properties.SignatureProperties;
+import io.github.douyayun.signature.util.JsonUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.data.redis.core.StringRedisTemplate;
@@ -21,7 +22,7 @@ public class RedisSecretStorage implements SecretStorage, Serializable {
 
     private StringRedisTemplate stringRedisTemplate;
 
-    private String key = "signature";
+    private String key = "signature:secret";
 
     public RedisSecretStorage(StringRedisTemplate stringRedisTemplate) {
         log.info("RedisSecretStorage...");
@@ -38,7 +39,7 @@ public class RedisSecretStorage implements SecretStorage, Serializable {
         List<SignatureProperties.Secret> list = new ArrayList<>();
         Map<Object, Object> entries = stringRedisTemplate.opsForHash().entries(key);
         for (Map.Entry<Object, Object> item : entries.entrySet()) {
-            list.add(new SignatureProperties.Secret(item.getKey() + "", item.getValue() + ""));
+            list.add(JsonUtils.fromJSON(item.getValue() + "", SignatureProperties.Secret.class));
         }
         return list;
     }
@@ -56,7 +57,7 @@ public class RedisSecretStorage implements SecretStorage, Serializable {
         }
         Object value = stringRedisTemplate.opsForHash().get(key, appId);
         if (value != null) {
-            return new SignatureProperties.Secret(appId, value + "");
+            return JsonUtils.fromJSON(value + "", SignatureProperties.Secret.class);
         }
         return null;
     }
@@ -73,7 +74,7 @@ public class RedisSecretStorage implements SecretStorage, Serializable {
             return;
         }
         secrets.forEach(item -> {
-            stringRedisTemplate.opsForHash().put(key, item.getAppId(), item.getAppSecret());
+            stringRedisTemplate.opsForHash().put(key, item.getAppId(), JsonUtils.toJson(item));
         });
     }
 
@@ -84,7 +85,7 @@ public class RedisSecretStorage implements SecretStorage, Serializable {
      */
     @Override
     public void appendSecret(SignatureProperties.Secret secret) {
-        stringRedisTemplate.opsForHash().put(key, secret.getAppId(), secret.getAppSecret());
+        stringRedisTemplate.opsForHash().put(key, secret.getAppId(), JsonUtils.toJson(secret));
     }
 
     /**

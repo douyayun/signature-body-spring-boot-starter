@@ -11,8 +11,8 @@ import java.security.MessageDigest;
  * @author houp
  * @since 1.0.0
  **/
-public class EncodeUtils {
-    private static final Logger log = LoggerFactory.getLogger(EncodeUtils.class);
+public class Md5Utils {
+    private static final Logger log = LoggerFactory.getLogger(Md5Utils.class);
 
     /**
      * MD5加密

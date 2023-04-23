@@ -1,8 +1,5 @@
 package com.example.douyayun.server.controller;
 
-import io.github.douyayun.signature.properties.SignatureProperties;
-import io.github.douyayun.signature.storage.SecretStorage;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -17,17 +14,8 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("echo")
 public class EchoController {
 
-    @Autowired
-    private SecretStorage secretStorage;
-
     @GetMapping("time")
     public String time() {
-        return System.currentTimeMillis() + "";
-    }
-
-    @GetMapping("append")
-    public String appent() {
-        secretStorage.appendSecret(new SignatureProperties.Secret("1", "1"));
         return System.currentTimeMillis() + "";
     }
 
