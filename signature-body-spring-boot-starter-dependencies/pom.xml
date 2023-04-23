@@ -16,9 +16,9 @@
         <flatten-maven-plugin.version>1.2.7</flatten-maven-plugin.version>
         <spring.boot.version>2.7.8</spring.boot.version>
         <commons-lang3.version>3.8.1</commons-lang3.version>
-        <commons-codec.version>1.15</commons-codec.version>
-        <lombok.version>1.18.24</lombok.version>
-        <guava.version>31.1-jre</guava.version>
+        <!-- <commons-codec.version>1.15</commons-codec.version> -->
+        <!-- <lombok.version>1.18.24</lombok.version> -->
+        <!-- <guava.version>31.1-jre</guava.version> -->
     </properties>
 
     <dependencyManagement>
@@ -43,16 +43,16 @@
                 <artifactId>commons-lang3</artifactId>
                 <version>${commons-lang3.version}</version>
             </dependency>
-            <dependency>
-                <groupId>commons-codec</groupId>
-                <artifactId>commons-codec</artifactId>
-                <version>${commons-codec.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>com.google.guava</groupId>
-                <artifactId>guava</artifactId>
-                <version>${guava.version}</version>
-            </dependency>
+            <!-- <dependency> -->
+            <!--     <groupId>commons-codec</groupId> -->
+            <!--     <artifactId>commons-codec</artifactId> -->
+            <!--     <version>${commons-codec.version}</version> -->
+            <!-- </dependency> -->
+            <!-- <dependency> -->
+            <!--     <groupId>com.google.guava</groupId> -->
+            <!--     <artifactId>guava</artifactId> -->
+            <!--     <version>${guava.version}</version> -->
+            <!-- </dependency> -->
 
             <dependency>
                 <groupId>io.github.douyayun</groupId>

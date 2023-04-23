@@ -25,15 +25,15 @@
             <artifactId>commons-lang3</artifactId>
             <scope>compile</scope>
         </dependency>
-        <dependency>
-            <groupId>commons-codec</groupId>
-            <artifactId>commons-codec</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>com.google.guava</groupId>
-            <artifactId>guava</artifactId>
-            <scope>compile</scope>
-        </dependency>
+        <!-- <dependency> -->
+        <!--     <groupId>commons-codec</groupId> -->
+        <!--     <artifactId>commons-codec</artifactId> -->
+        <!-- </dependency> -->
+        <!-- <dependency> -->
+        <!--     <groupId>com.google.guava</groupId> -->
+        <!--     <artifactId>guava</artifactId> -->
+        <!--     <scope>compile</scope> -->
+        <!-- </dependency> -->
 
         <!-- <dependency> -->
         <!--     <groupId>org.projectlombok</groupId> -->

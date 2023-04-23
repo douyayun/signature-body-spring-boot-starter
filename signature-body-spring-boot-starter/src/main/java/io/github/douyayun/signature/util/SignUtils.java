@@ -1,6 +1,5 @@
 package io.github.douyayun.signature.util;
 
-import org.apache.commons.codec.digest.DigestUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -25,7 +24,9 @@ public class SignUtils {
      * @return
      */
     public static String getSign(String data) {
-        return DigestUtils.md5Hex(data).toLowerCase();
+        // commons-codec
+        // return DigestUtils.md5Hex(data).toLowerCase();
+        return EncodeUtils.md5(data).toLowerCase();
     }
 
     /**
