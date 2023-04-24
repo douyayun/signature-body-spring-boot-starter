@@ -75,7 +75,7 @@ public class SignatureInterceptor implements HandlerInterceptor {
                 Assert.isTrue(false, "timestamp已过期,有效期" + signatureProperties.getTimestampValidityInSeconds() + "秒");
             }
         }
-        Assert.isTrue(nonceStorage.uniqueRequest(appId, nonce, signatureProperties.getTimestampValidityInSeconds()), "nonce不能重复使用");
+        // Assert.isTrue(nonceStorage.uniqueRequest(appId, nonce, signatureProperties.getTimestampValidityInSeconds()), "nonce不能重复使用");
         Map<String, String[]> parameterMap = request.getParameterMap();
         log.info("signature parameter：" + JsonUtils.toJson(parameterMap));
         String parameterData = SignUtils.sortMapByKey(parameterMap);
@@ -86,9 +86,9 @@ public class SignatureInterceptor implements HandlerInterceptor {
             log.info("signature json data：{}", jsonData);
         }
         String noSign = appId + timestamp + nonce + parameterData + jsonData + appSecret;
-        String signData = SignUtils.getSign(noSign);
-        log.info("signature 待签名字符串：{},本机签名：{},签名参数：{}", noSign, signData, sign);
-        if (!sign.equalsIgnoreCase(signData) && !signatureProperties.isDebug()) {
+        log.info("signature 待签名字符串：{},签名参数：{}", noSign, sign);
+        if (!SignUtils.verify(noSign, secret.getPublicKey(), sign, signatureProperties.getSignType())
+                && !signatureProperties.isDebug()) {
             throw new SignatureException("sign签名错误");
         }
         return true;

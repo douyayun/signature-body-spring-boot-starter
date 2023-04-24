@@ -1,4 +1,4 @@
-package io.github.douyayun.signature.util;
+package io.github.douyayun.signature.util.digest;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -11,8 +11,8 @@ import java.security.MessageDigest;
  * @author houp
  * @since 1.0.0
  **/
-public class Md5Utils {
-    private static final Logger log = LoggerFactory.getLogger(Md5Utils.class);
+public class MD5Utils {
+    private static final Logger log = LoggerFactory.getLogger(MD5Utils.class);
 
     /**
      * MD5加密
@@ -28,7 +28,6 @@ public class Md5Utils {
             byte[] messageDigest = algorithm.digest();
             return new String(toHex(messageDigest).getBytes("UTF-8"), "UTF-8");
         } catch (Exception e) {
-            log.error("create md5 error...", e);
             throw new RuntimeException("MD5生成错误", e);
         }
     }
