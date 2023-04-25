@@ -1,5 +1,6 @@
 package io.github.douyayun.signature.interceptor;
 
+import io.github.douyayun.signature.annotation.Signature;
 import io.github.douyayun.signature.exception.SignatureException;
 import io.github.douyayun.signature.properties.Secret;
 import io.github.douyayun.signature.properties.SignatureProperties;
@@ -55,6 +56,9 @@ public class SignatureInterceptor implements HandlerInterceptor {
         if (!handler.getClass().isAssignableFrom(HandlerMethod.class)) {
             return false;
         }
+        HandlerMethod handlerMethod = (HandlerMethod) handler;
+        Signature signature = handlerMethod.getMethod().getAnnotation(Signature.class);
+        
         String jsonData = "";
         String method = request.getMethod().toUpperCase();
         String appId = request.getHeader("appId");

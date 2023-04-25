@@ -50,7 +50,7 @@ public class InitSignatureSecretRunner implements CommandLineRunner {
         // secretStorage.getAllSecret();
         // secretStorage.removeSecret("1621923672504");
         // secretStorage.removeAllSecret();
-        String data = "16219236725041682303422099a3e3b7db-eca2-4d54-9aab-a384e436d5bbage=23&name=1,2,3&t=aaaaf8c30adb67b14bc6a53b29b1de01b150";
+        String data = "16219236725041682409957000a3e3b7db-eca2-4d54-9aab-a384e436d5bbage=23&name=1,2,3&t=aaaaf8c30adb67b14bc6a53b29b1de01b150";
         String sign = SignUtils.sign(data, privateKey, signatureProperties.getSignType());
         log.info("signType：{} sign：{}", signatureProperties.getSignType(), sign);
     }

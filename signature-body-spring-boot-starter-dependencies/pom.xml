@@ -12,7 +12,7 @@
     <url>https://github.com/douyayun/signature-body-spring-boot-starter</url>
 
     <properties>
-        <revision>1.0.4</revision>
+        <revision>1.0.5</revision>
         <flatten-maven-plugin.version>1.2.7</flatten-maven-plugin.version>
         <spring.boot.version>2.7.8</spring.boot.version>
         <commons-lang3.version>3.8.1</commons-lang3.version>
