@@ -1,6 +1,6 @@
 package io.github.douyayun.signature.storage;
 
-import io.github.douyayun.signature.properties.SignatureProperties;
+import io.github.douyayun.signature.properties.Secret;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -22,7 +22,7 @@ public class MemorySecretStorage implements SecretStorage, Serializable {
     /**
      * 签名密钥
      */
-    private static Map<String, SignatureProperties.Secret> signSecretMap = new ConcurrentHashMap<>();
+    private static Map<String, Secret> signSecretMap = new ConcurrentHashMap<>();
 
     /**
      * 获取所有秘钥
@@ -30,9 +30,9 @@ public class MemorySecretStorage implements SecretStorage, Serializable {
      * @return
      */
     @Override
-    public List<SignatureProperties.Secret> getAllSecret() {
-        List<SignatureProperties.Secret> list = new ArrayList<>();
-        for (Map.Entry<String, SignatureProperties.Secret> item : signSecretMap.entrySet()) {
+    public List<Secret> getAllSecret() {
+        List<Secret> list = new ArrayList<>();
+        for (Map.Entry<String, Secret> item : signSecretMap.entrySet()) {
             list.add(item.getValue());
         }
         return list;
@@ -45,7 +45,7 @@ public class MemorySecretStorage implements SecretStorage, Serializable {
      * @return
      */
     @Override
-    public SignatureProperties.Secret getSecret(String appId) {
+    public Secret getSecret(String appId) {
         if (null == appId) {
             return null;
         }
@@ -61,7 +61,7 @@ public class MemorySecretStorage implements SecretStorage, Serializable {
      * @param secrets
      */
     @Override
-    public void initSecret(List<SignatureProperties.Secret> secrets) {
+    public void initSecret(List<Secret> secrets) {
         signSecretMap.clear();
         if (secrets == null) {
             return;
@@ -77,7 +77,7 @@ public class MemorySecretStorage implements SecretStorage, Serializable {
      * @param secret
      */
     @Override
-    public void appendSecret(SignatureProperties.Secret secret) {
+    public void appendSecret(Secret secret) {
         signSecretMap.put(secret.getAppId(), secret);
     }
 

@@ -8,7 +8,7 @@
 | 参数名称  | 必填 | 说明                          | 示例                                 |
 | --------- | ---- | ----------------------------- | ------------------------------------ |
 | appId     | 是   | 应用Id                        | 1621923672504                        |
-| timestamp | 是   | 请求时间戳（秒）              | 1681805978                           |
+| timestamp | 是   | 请求时间戳（毫秒）            | 1682303422099              |
 | nonce     | 是   | 每次请求随机生成，需全局唯一 | 8091a230-8c4f-4d6f-b4be-6c585af6c8ad |
 | sign      | 是   | 签名                          | ee242f43922dc3f70383a1c17ecaf169     |
 
@@ -30,13 +30,17 @@
 signature.debug=false
 signature.enabled=true
 signature.timestamp-enabled=true
+signature.timestamp-validity-in-seconds=30000
+signature.sign-type=rsa
 signature.include-paths=/test1/**,/test2/**
 signature.exclude-paths=/echo/**
 signature.secret-storage-type=redis
 signature.secret[0].app-id=1621923672504
 signature.secret[0].app-secret=f8c30adb67b14bc6a53b29b1de01b150
+signature.secret[0].public-key=
 signature.secret[1].app-id=1621923672505
 signature.secret[1].app-secret=f8c30adb67b14bc6a53b29b1de01b150
+signature.secret[0].public-key=
 # redis
 spring.redis.host=127.0.0.1
 spring.redis.port=6379
@@ -44,7 +48,7 @@ spring.redis.password=123456
 spring.redis.database=0
 ```
 
-### 秘钥外部初始化：
+### 应用秘钥外部初始化
 
 ```
 import io.github.douyayun.signature.properties.SignatureProperties;
@@ -88,24 +92,24 @@ public class InitSignatureSecretRunner implements CommandLineRunner {
 }
 ```
 
-### sign签名规则：
+### 签名规则
 
 ```
- String noSign = appId + timestamp + nonce + parameterData + jsonData + appSecret;
+ String noSign = appId + timestamp + nonce + parameterData + jsonData + secret;
  String sign = Md5(noSign);
 ```
 
 1、parameterData为请求参数包含url中的query和form表单中的参数，并按照参数名ASCII码从小到大排序，按照key=value的格式生成键值对（即key1=value1&key2=value2&key3=value3）拼接成字符串parameterData<br>
 2、jsonData为请求体中的json数据，此数据原封不动的通过接口传递至接口中<br>
 
-### sign签名示例：
+### sign签名示例
 
 | 参数名称  | 说明                           | 示例值                               |
 | --------- | ------------------------------ | ------------------------------------ |
 | appId     | 应用Id                         | 1621923672504                        |
-| timestamp | 请求时间戳（秒）               | 1681805978                           |
+| timestamp | 请求时间戳（秒）               | 1682303422099                        |
 | nonce     | 每次请求随机生成，需要全局唯一 | 8091a230-8c4f-4d6f-b4be-6c585af6c8ad |
-| appSecret | 应用秘钥                       | f8c30adb67b14bc6a53b29b1de01b150     |
+| secret | 应用秘钥                       | f8c30adb67b14bc6a53b29b1de01b150     |
 
 #### (1)、get请求
 

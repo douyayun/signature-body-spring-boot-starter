@@ -1,6 +1,7 @@
 package io.github.douyayun.signature.interceptor;
 
 import io.github.douyayun.signature.exception.SignatureException;
+import io.github.douyayun.signature.properties.Secret;
 import io.github.douyayun.signature.properties.SignatureProperties;
 import io.github.douyayun.signature.storage.NonceStorage;
 import io.github.douyayun.signature.storage.SecretStorage;
@@ -44,9 +45,9 @@ public class SignatureInterceptor implements HandlerInterceptor {
         this.signatureProperties = signatureProperties;
         this.nonceStorage = nonceStorage;
         this.secretStorage = secretStorage;
-        if (signatureProperties.getSecret() != null && !signatureProperties.getSecret().isEmpty()) {
-            secretStorage.initSecret(signatureProperties.getSecret());
-        }
+        // if (signatureProperties.getSecret() != null && !signatureProperties.getSecret().isEmpty()) {
+        //     secretStorage.initSecret(signatureProperties.getSecret());
+        // }
     }
 
     @Override
@@ -57,7 +58,7 @@ public class SignatureInterceptor implements HandlerInterceptor {
         String jsonData = "";
         String method = request.getMethod().toUpperCase();
         String appId = request.getHeader("appId");
-        SignatureProperties.Secret secret = secretStorage.getSecret(appId);
+        Secret secret = secretStorage.getSecret(appId);
         String appSecret = secret == null ? "" : secret.getAppSecret();
         String timestamp = request.getHeader("timestamp");
         String nonce = request.getHeader("nonce");
@@ -75,7 +76,7 @@ public class SignatureInterceptor implements HandlerInterceptor {
                 Assert.isTrue(false, "timestamp已过期,有效期" + signatureProperties.getTimestampValidityInSeconds() + "秒");
             }
         }
-        // Assert.isTrue(nonceStorage.uniqueRequest(appId, nonce, signatureProperties.getTimestampValidityInSeconds()), "nonce不能重复使用");
+        Assert.isTrue(nonceStorage.uniqueRequest(appId, nonce, signatureProperties.getTimestampValidityInSeconds()), "nonce不能重复使用");
         Map<String, String[]> parameterMap = request.getParameterMap();
         log.info("signature parameter：" + JsonUtils.toJson(parameterMap));
         String parameterData = SignUtils.sortMapByKey(parameterMap);

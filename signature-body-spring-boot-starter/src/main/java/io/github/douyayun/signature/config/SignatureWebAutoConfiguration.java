@@ -32,7 +32,7 @@ public class SignatureWebAutoConfiguration {
      */
     @Bean
     public FilterRegistrationBean getFilterRegistrationBean() {
-        Assert.notEmpty(signatureProperties.getSecret(), "signature.includePaths配置不能为空");
+        Assert.notEmpty(signatureProperties.getIncludePaths(), "signature.includePaths配置不能为空");
         FilterRegistrationBean bean = new FilterRegistrationBean();
         bean.setFilter(new RequestBodyReadFilter());
         bean.setName("RequestBodyReadFilter");

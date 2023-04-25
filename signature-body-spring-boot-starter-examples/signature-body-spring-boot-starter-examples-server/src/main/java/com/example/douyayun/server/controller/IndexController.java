@@ -1,6 +1,6 @@
 package com.example.douyayun.server.controller;
 
-import io.github.douyayun.signature.properties.SignatureProperties;
+import io.github.douyayun.signature.properties.Secret;
 import io.github.douyayun.signature.storage.SecretStorage;
 import io.github.douyayun.signature.util.LocalCache;
 import lombok.extern.slf4j.Slf4j;
@@ -51,7 +51,7 @@ public class IndexController {
 
     @GetMapping("/s/a")
     public String appendSecret() {
-        SignatureProperties.Secret secret = new SignatureProperties.Secret();
+        Secret secret = new Secret();
         secret.setAppId("1621923672506");
         secret.setAppSecret("f8c30adb67b14bc6a53b29b1de01b506");
         secret.setPublicKey("MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAi2Qlcr5vc430gUflUaXcLWGHDXtWQYhwzzPlFd4MHry11/HH37QonYI+37m7anPBiF0PtA7nL2RxGT1n65BbzaPY9duw8ozHxfmWL1CDmJCD+Bmhc9IEZWat1rklJ7oGaEkwrbA8h6rCCkmF/rbB2oJNYhgga6jgswMalgC+v4attscteuJtNnhh7ZE7zKmGwNWNBFKc2eKb3403l6aquYmttROWSQ1vCDx9v1Afx85sjVLed7hw2xqOgTWB2T6ftJK/iXjwlOPANkAe5rtuJ1+Moun1i48uOLEVDgfOWds7w58eRo5PNKTK2YDa6DUvThSS6d8SpPuvqsY4UlLT2wIDAQAB");

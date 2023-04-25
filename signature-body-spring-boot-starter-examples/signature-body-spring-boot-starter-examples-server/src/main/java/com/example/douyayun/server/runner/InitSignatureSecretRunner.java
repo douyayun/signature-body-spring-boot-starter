@@ -1,5 +1,6 @@
 package com.example.douyayun.server.runner;
 
+import io.github.douyayun.signature.properties.Secret;
 import io.github.douyayun.signature.properties.SignatureProperties;
 import io.github.douyayun.signature.storage.SecretStorage;
 import io.github.douyayun.signature.util.SignUtils;
@@ -40,8 +41,8 @@ public class InitSignatureSecretRunner implements CommandLineRunner {
 
     @Override
     public void run(String... args) {
-        List<SignatureProperties.Secret> secrets = new ArrayList<>();
-        SignatureProperties.Secret secret = new SignatureProperties.Secret(appId, appSecret, publicKey);
+        List<Secret> secrets = new ArrayList<>();
+        Secret secret = new Secret(appId, this.appSecret, publicKey);
         secrets.add(secret);
         secretStorage.initSecret(secrets);
         // secretStorage.appendSecret(secret);

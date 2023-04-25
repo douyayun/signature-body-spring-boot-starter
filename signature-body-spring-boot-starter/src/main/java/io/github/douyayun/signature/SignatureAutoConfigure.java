@@ -56,7 +56,7 @@ public class SignatureAutoConfigure implements WebMvcConfigurer {
      */
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
-        Assert.notEmpty(signatureProperties.getSecret(), "signature.includePaths配置不能为空");
+        Assert.notEmpty(signatureProperties.getIncludePaths(), "signature.includePaths配置不能为空");
         List<String> excludePaths = signatureProperties.getExcludePaths();
         InterceptorRegistration interceptorRegistration = registry.addInterceptor(new SignatureInterceptor(signatureProperties, nonceStorage, secretStorage))
                 .addPathPatterns(signatureProperties.getIncludePaths());

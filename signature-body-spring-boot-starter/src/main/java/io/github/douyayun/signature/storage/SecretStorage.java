@@ -1,6 +1,6 @@
 package io.github.douyayun.signature.storage;
 
-import io.github.douyayun.signature.properties.SignatureProperties;
+import io.github.douyayun.signature.properties.Secret;
 
 import java.util.List;
 
@@ -17,7 +17,7 @@ public interface SecretStorage {
      *
      * @return
      */
-    List<SignatureProperties.Secret> getAllSecret();
+    List<Secret> getAllSecret();
 
     /**
      * 获取单个秘钥
@@ -25,21 +25,21 @@ public interface SecretStorage {
      * @param appId
      * @return
      */
-    SignatureProperties.Secret getSecret(String appId);
+    Secret getSecret(String appId);
 
     /**
      * 初始化秘钥
      *
      * @param secrets
      */
-    void initSecret(List<SignatureProperties.Secret> secrets);
+    void initSecret(List<Secret> secrets);
 
     /**
      * 追加秘钥
      *
      * @param secret
      */
-    void appendSecret(SignatureProperties.Secret secret);
+    void appendSecret(Secret secret);
 
     /**
      * 移除单个秘钥
