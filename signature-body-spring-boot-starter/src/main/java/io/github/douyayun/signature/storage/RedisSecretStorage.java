@@ -25,7 +25,7 @@ public class RedisSecretStorage implements SecretStorage, Serializable {
     private String key = "signature:secret";
 
     public RedisSecretStorage(StringRedisTemplate stringRedisTemplate) {
-        log.info("RedisSecretStorage...");
+        // log.info("RedisSecretStorage...");
         this.stringRedisTemplate = stringRedisTemplate;
     }
 

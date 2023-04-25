@@ -16,7 +16,7 @@ public class MemoryNonceStorage implements NonceStorage, Serializable {
     private static final Logger log = LoggerFactory.getLogger(MemoryNonceStorage.class);
 
     public MemoryNonceStorage() {
-        log.info("MemoryConfigStorage...");
+        // log.info("MemoryConfigStorage...");
     }
 
     /**

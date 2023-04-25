@@ -19,7 +19,7 @@ public class RedisNonceStorage implements NonceStorage, Serializable {
     private StringRedisTemplate stringRedisTemplate;
 
     public RedisNonceStorage(StringRedisTemplate stringRedisTemplate) {
-        log.info("RedisConfigStorage...");
+        // log.info("RedisConfigStorage...");
         this.stringRedisTemplate = stringRedisTemplate;
     }
 

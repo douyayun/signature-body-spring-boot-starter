@@ -24,6 +24,9 @@ public class MemorySecretStorage implements SecretStorage, Serializable {
      */
     private static Map<String, Secret> signSecretMap = new ConcurrentHashMap<>();
 
+    public MemorySecretStorage() {
+    }
+
     /**
      * 获取所有秘钥
      *
