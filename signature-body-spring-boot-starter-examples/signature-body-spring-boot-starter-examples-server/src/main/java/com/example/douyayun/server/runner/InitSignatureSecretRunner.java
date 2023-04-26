@@ -23,17 +23,16 @@ import java.util.List;
 @Slf4j
 public class InitSignatureSecretRunner implements CommandLineRunner {
 
-    @Autowired
+    @Autowired(required = false)
     private SecretStorage secretStorage;
 
-    @Autowired
+    @Autowired(required = false)
     private SignatureProperties signatureProperties;
 
     @Value("${appId}")
     private String appId;
     @Value("${appSecret}")
     private String appSecret;
-    // RSA
     @Value("${publicKey}")
     private String publicKey;
     @Value("${privateKey}")
