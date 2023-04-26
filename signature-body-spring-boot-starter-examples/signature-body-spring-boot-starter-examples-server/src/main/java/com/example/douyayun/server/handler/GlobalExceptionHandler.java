@@ -1,12 +1,12 @@
 package com.example.douyayun.server.handler;
 
 import com.example.douyayun.server.vo.ApiResponse;
-import io.github.douyayun.signature.exception.SignatureException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
 import javax.servlet.http.HttpServletRequest;
+import java.security.SignatureException;
 
 /**
  * 全局异常处理器

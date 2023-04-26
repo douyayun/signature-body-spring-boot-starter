@@ -2,7 +2,6 @@ package com.example.douyayun.server.controller;
 
 import com.example.douyayun.server.vo.ApiResponse;
 import com.example.douyayun.server.vo.TestRequestVo;
-import io.github.douyayun.signature.util.JsonUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
@@ -25,8 +24,8 @@ public class Test1Controller {
     @GetMapping("get")
     public TestRequestVo get(String[] name, Integer age, String t) {
         TestRequestVo testRequestVo = TestRequestVo.builder().id(12).age(20).mobile("1311111112").name("houp").build();
-        String data = JsonUtils.toJson(testRequestVo);
-        log.info(data);
+        // String data = JsonUtils.toJson(testRequestVo);
+        // log.info(data);
         return testRequestVo;
     }
 
