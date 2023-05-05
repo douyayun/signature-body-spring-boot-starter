@@ -25,6 +25,8 @@
 
 #### `property`配置
 
+signature.sign-type支持MD5、RSA、SM2
+
 ```
 # signature
 signature.debug=false
@@ -35,12 +37,12 @@ signature.sign-type=rsa
 signature.include-paths=/test1/**,/test2/**
 signature.exclude-paths=/echo/**
 signature.secret-storage-type=redis
-signature.secret[0].app-id=1621923672504
-signature.secret[0].app-secret=f8c30adb67b14bc6a53b29b1de01b150
-signature.secret[0].public-key=
-signature.secret[1].app-id=1621923672505
-signature.secret[1].app-secret=f8c30adb67b14bc6a53b29b1de01b150
-signature.secret[0].public-key=
+#signature.secret[0].app-id=1621923672504
+#signature.secret[0].app-secret=f8c30adb67b14bc6a53b29b1de01b150
+#signature.secret[0].public-key=
+#signature.secret[1].app-id=1621923672505
+#signature.secret[1].app-secret=f8c30adb67b14bc6a53b29b1de01b150
+#signature.secret[0].public-key=
 # redis
 spring.redis.host=127.0.0.1
 spring.redis.port=6379
@@ -76,10 +78,8 @@ public class InitSignatureSecretRunner implements CommandLineRunner {
 
     @Override
     public void run(String... args) {
-        List<SignatureProperties.Secret> secrets = new ArrayList<>();
-        SignatureProperties.Secret secret = new SignatureProperties.Secret();
-        secret.setAppId("1621923672504");
-        secret.setAppSecret("f8c30adb67b14bc6a53b29b1de01b150");
+        List<Secret> secrets = new ArrayList<>();
+        Secret secret = new Secret(appId, this.appSecret, publicKey);
         secrets.add(secret);
         secretStorage.initSecret(secrets);
         // secretStorage.appendSecret(secret);
